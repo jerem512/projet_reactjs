@@ -36,15 +36,12 @@ a{
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.box.hide {
-  display: none;
-}
-.backdiv.hide{
+.hide {
   display: none;
 }
 .paragraphe{
   display: none;
 }
-.paragraphe{
+.show{
   display: block;
 }

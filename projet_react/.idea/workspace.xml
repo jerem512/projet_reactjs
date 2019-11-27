@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b111028d-62ae-451c-b8f0-c47205ec483a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/projet_react.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/projet_react.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/App/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/App/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/App/App.js" afterDir="false" />
@@ -50,6 +49,12 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Component/Choix" />
+      <recent name="$PROJECT_DIR$/src/Component/App" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -76,7 +81,7 @@
       <workItem from="1574853602188" duration="13000" />
       <workItem from="1574853801674" duration="24000" />
       <workItem from="1574854047481" duration="41000" />
-      <workItem from="1574854099614" duration="8605000" />
+      <workItem from="1574854099614" duration="12242000" />
     </task>
     <servers />
   </component>

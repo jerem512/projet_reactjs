@@ -25,20 +25,18 @@ class App extends React.Component {
         }
         return(
 
-
             <div>
-                <div  className={ divClass.join(' ')} onClick={this.toggle.bind(this)}>
+                <div  className={ divClass.join(' ')}>
                     <div className={ boxClass.join(' ')} onClick={this.toggle.bind(this)}>
                         <p className="jouer">JOUER</p>
                     </div>
                 </div>
-                <div>
-                    <p>code de Andrei</p>
+                <div className={ pClass.join(' ')}>
+
                 </div>
             </div>
 
         );
-
     }
 }
 export default App;
