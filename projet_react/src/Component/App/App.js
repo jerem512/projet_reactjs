@@ -1,10 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import '../Score/Score.js';
+
 
 function App() {
   return (
-    <p> test </p>
+    
+    <div className="App">
+      <header className="App-header">
+        <h1>Premier niveau</h1>
+      </header>
+    </div>
   );
 }
 

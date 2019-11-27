@@ -1,0 +1,12 @@
+
+#score{
+    color: black;
+    height: 10vh;
+  }
+
+.score_compteur{
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: right;
+    margin: 1em;
+}
