@@ -10,3 +10,7 @@
     text-align: right;
     margin: 1em;
 }
+
+.hidden{
+  display: none;
+}
