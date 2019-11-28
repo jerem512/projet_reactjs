@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './Timer.css';
 
-let timer;
-
 function interpolate(from, to, progress) {
 	if(progress <= 0) {
 		return from;
@@ -16,13 +14,15 @@ function interpolate(from, to, progress) {
 
 class Timer extends React.Component {
 	
+	static INSTANCE;
+	
 	constructor(props) {
 		super(props);
 		
 		this.ticks = 0;
 		this.time = 15;
-		this.paused = false;
-		this.pauseAnimTimer = 0;
+		this.paused = true;
+		this.pauseAnimTimer = 1;
 		
 		this.radius = 30;
 		this.border = 2;
@@ -33,7 +33,37 @@ class Timer extends React.Component {
 		
 		this.updateState();
 		
-		timer = this;
+		Timer.INSTANCE = this;
+	}
+	
+	componentDidMount() {
+		setInterval(() => { this.update() }, 1000/60);
+		document.body.addEventListener("keydown", function(e) {
+			if(e.key == " ") {
+				Timer.INSTANCE.setPaused();
+			}
+		});
+	}
+	
+	update() {
+		if(!this.paused) {
+			this.ticks ++;
+			if(this.ticks == this.time*60) {
+				this.paused = true;
+			} else if(this.ticks == (2*this.time/3)*60) {
+				this.className = "lowTime";
+			} else if(this.ticks == (this.time/3)*60) {
+				this.className = "midTime";
+			}
+			if(this.pauseAnimTimer > 0) {
+				this.pauseAnimTimer --;
+			}
+		} else {
+			if(this.pauseAnimTimer < 15) {
+				this.pauseAnimTimer ++;
+			}
+		}
+		this.updateState();
 	}
 	
 	updateState() {
@@ -43,8 +73,6 @@ class Timer extends React.Component {
 				newState[value] = this[value];
 			}
 		}
-		
-		
 		
 		if(Object.keys(newState).length > 0) {
 			this.setState(newState);
@@ -69,41 +97,11 @@ class Timer extends React.Component {
 		return path;
 	}
 	
-	componentDidMount() {
-		setInterval(() => { this.update() }, 1000/60);
-		document.body.addEventListener("keydown", function(e) {
-			if(e.key == " ") {
-				timer.toggle();
-			}
-		});
-	}
-	
-	toggle() {
-		if(this.ticks < this.time*60) {
-			this.paused = !this.paused;
+	setPaused(paused = !this.paused) {
+		if(this.ticks < this.time*60 && this.paused != paused) {
+			this.paused = paused;
+			this.updateState();
 		}
-		this.updateState();
-	}
-	
-	update() {
-		if(!this.paused) {
-			this.ticks ++;
-			if(this.ticks == this.time*60) {
-				this.paused = true;
-			} else if(this.ticks == (2*this.time/3)*60) {
-				this.className = "lowTime";
-			} else if(this.ticks == (this.time/3)*60) {
-				this.className = "midTime";
-			}
-			if(this.pauseAnimTimer > 0) {
-				this.pauseAnimTimer --;
-			}
-		} else {
-			if(this.pauseAnimTimer < 15) {
-				this.pauseAnimTimer ++;
-			}
-		}
-		this.updateState();
 	}
 	
 	getPlayPausePath(i) {
@@ -125,10 +123,22 @@ class Timer extends React.Component {
 		}
 	}
 	
+	isPaused() {
+		return this.paused;
+	}
+	
+	start() {
+		this.setPaused(false);
+	}
+	
+	stop() {
+		this.setPaused(true);
+	}
+	
 	render() {
 		return (
 			<div id="controls">
-				<svg id="playpause" onClick={() => this.toggle()}>
+				<svg id="playpause" onClick={() => this.setPaused()}>
 					<path id="pause1" d={this.getPlayPausePath(0)}></path>
 					<path id="pause2" d={this.getPlayPausePath(1)}></path>
 				</svg>
