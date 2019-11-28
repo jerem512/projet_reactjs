@@ -1,21 +1,23 @@
 .bouton {
     width: 300px;
     height: 150px;
-    background-color: rgb(0, 162, 190);
+    background-color: black;
     border: none;
-    color: whitesmoke;
+    color: #ffd119;
 }
-/*
-.choix_sec_js:hover { background-color: rgb(119, 128, 0); }
-.choix_sec_js:active { background-color: rgba(119, 128, 0)!important; }
-*/
-/*
+
+.choix_sec_js:hover { background-color: #ffd119; color: black;}
+.choix_sec_js:active { background-color: #ffd119!important; color: black }
+
+
 #arrowPlay {
-    background-color: green;
+    background-color: black;
+    color: #ffd119;
     border: none;
 }
 #arrowPlay:hover {
-    background-color: rgb(4, 182, 4);
+    background-color: #ffd119;
+    color: black;
 }
 
 #play * {
@@ -24,4 +26,8 @@
     display: block;
     margin: auto;
     text-align: center;
-}*/
+}
+
+#functions{
+    margin-left: 0 !important; 
+}

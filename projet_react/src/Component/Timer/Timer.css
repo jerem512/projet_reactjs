@@ -1,12 +1,12 @@
 :root {
-	--timer-border-1: green;
+	--timer-border-1:  black;
 	--timer-fill-1: #00B300;
 
-	--timer-border-2: #B27300;
-	--timer-fill-2: orange;
+	--timer-border-2:  black;
+	--timer-fill-2: #f57a22;
 
-	--timer-border-3: #B30000;
-	--timer-fill-3: red;
+	--timer-border-3:  black;
+	--timer-fill-3: #d2071e;
 
 	--timer-inText: white;
 	--timer-outText: black;
@@ -30,7 +30,7 @@
 }
 
 #playpause path {
-	fill: #202020;
+	fill: black;
 }
 
 #timer {
