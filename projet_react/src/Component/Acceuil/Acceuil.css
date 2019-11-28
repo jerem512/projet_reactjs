@@ -3,6 +3,7 @@
     height: 100vh;
     width: 100vw;
     background-color: rgb(255,255,255);
+    z-index: 1;
 }
 .jouer{
     margin: 0;

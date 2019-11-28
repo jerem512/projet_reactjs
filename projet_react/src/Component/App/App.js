@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
-import '../Acceuil/Acceuil'
+import '../Acceuil/Acceuil';
+import '../Choix/Choix';
+import '../Timer/Timer';
+import '../Score/Score';
 
 
         function App() {

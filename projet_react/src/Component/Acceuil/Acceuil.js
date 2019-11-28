@@ -22,10 +22,6 @@ class Acceuil extends React.Component {
         if(this.state.addClass) {
             divClass.push('hide');
         }
-        let pClass = ["paragraphe"];
-        if(this.state.addClass) {
-            pClass.push('show');
-        }
         return(
 
             <div>
@@ -33,9 +29,6 @@ class Acceuil extends React.Component {
                     <div className={ boxClass.join(' ')} onClick={this.toggle.bind(this)}>
                         <p className="jouer">JOUER</p>
                     </div>
-                </div>
-                <div className={ pClass.join(' ')}>
-
                 </div>
             </div>
 
