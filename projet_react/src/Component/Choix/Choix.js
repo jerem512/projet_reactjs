@@ -74,7 +74,7 @@ class Choix extends React.Component {
         return (
             <div className="mt-5">
                 <div id="functions" className="row col-12">
-                    <button id="arrowPlay" className="btn btn-success col-md-4 mx-auto" onClick={() => this.start()}><span className="glyphicon glyphicon-play"></span>Commencez</button>
+                    <button id="arrowPlay" className="btn btn-warning col-md-4 mx-auto" onClick={() => this.start()}><span className="glyphicon glyphicon-play"></span>Commencez</button>
                     <div id="play" className="hide col-md-3 mx-auto">
                         <img src={icoAudio} alt="logo" /* className="w-100"*//>
                         <div className="mx-auto">{this.soundFragment}</div>
