@@ -1,11 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import '../Acceuil/Acceuil';
+import '../Choix/Choix';
+import '../Timer/Timer';
+import '../Score/Score';
 
-function App() {
-  return (
-    <p> test </p>
-  );
-}
 
+        function App() {
+            return (
+                <div className="App">
+                    <header className="App-header">
+                        <h1>Premier niveau</h1>
+                    </header>
+                </div>
+            );
+    }
 export default App;

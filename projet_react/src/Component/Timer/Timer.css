@@ -1,16 +1,16 @@
 :root {
 	--timer-border-1: green;
 	--timer-fill-1: #00B300;
-	
+
 	--timer-border-2: #B27300;
 	--timer-fill-2: orange;
-	
+
 	--timer-border-3: #B30000;
 	--timer-fill-3: red;
-	
+
 	--timer-inText: white;
 	--timer-outText: black;
-	
+
 	--btn-size: 30px;
 	--btn-line-size: calc(var(--btn-size)/2);
 }
