@@ -16,16 +16,26 @@ class Compteur extends React.Component {
             nb: this.state.nb + 1
         })
     }
- 
+    
+    decrement() {
+        this.setState({
+            nb: this.state.nb - 1
+        })
+    }
+
     render() {
         return (
             <div className="score_compteur">
                 <p>   
                 Score : {this.state.nb}
                 </p>
-                <button onClick={ ( ) => this.increment() }>
+                <button className="btn btn-warning" onClick={ ( ) => this.increment() }>
                     +1
                 </button>
+                <button className="btn btn-danger" onClick={ ( ) => this.decrement() }>
+                    -1
+                </button>
+
             </div>
         )
     }

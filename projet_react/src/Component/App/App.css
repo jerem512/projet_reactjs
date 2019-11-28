@@ -25,4 +25,9 @@
   background-color: #292929;
   min-height: 8vh;
   color: white;
+  border-bottom: 1px solid white;
+}
+
+body{
+  background-color: #4f4e4e ;
 }
