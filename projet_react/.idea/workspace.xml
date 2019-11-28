@@ -2,25 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b111028d-62ae-451c-b8f0-c47205ec483a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Component/Score/Score.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Component/Score/Score.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Component/Timer/Timer.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Component/Timer/Timer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/Acceuil/Acceuil.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Acceuil/Acceuil.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Acceuil/Acceuil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Acceuil/Acceuil.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/App/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/Choix/Choix.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Choix/Choix.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/Choix/Choix.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Choix/Choix.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Choix/media/icoAudio.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Choix/media/icoNoAudio.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Choix/media/icoPlay.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Choix/media/icoStop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Niveau_Score/Niveau_Score.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Niveau_Score/Niveau_Score.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Timing/Timing.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Timing/Timing.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/Score/Score.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Score/Score.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
