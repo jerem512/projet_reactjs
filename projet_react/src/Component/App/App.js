@@ -1,42 +1,15 @@
 import React from 'react';
 import './App.css';
+import '../Acceuil/Acceuil'
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {addClass: false}
-    }
-    toggle() {
-        this.setState({addClass: !this.state.addClass});
-    }
-    render() {
 
-        let boxClass = ["box"];
-        if(this.state.addClass) {
-            boxClass.push('hide');
-        }
-        let divClass = ["backdiv"];
-        if(this.state.addClass) {
-            divClass.push('hide');
-        }
-        let pClass = ["paragraphe"];
-        if(this.state.addClass) {
-            pClass.push('show');
-        }
-        return(
-
-            <div>
-                <div  className={ divClass.join(' ')}>
-                    <div className={ boxClass.join(' ')} onClick={this.toggle.bind(this)}>
-                        <p className="jouer">JOUER</p>
-                    </div>
+        function App() {
+            return (
+                <div className="App">
+                    <header className="App-header">
+                        <h1>Premier niveau</h1>
+                    </header>
                 </div>
-                <div className={ pClass.join(' ')}>
-
-                </div>
-            </div>
-
-        );
+            );
     }
-}
 export default App;
