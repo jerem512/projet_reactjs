@@ -39,24 +39,14 @@ class Compteur extends React.Component {
 
     render() {
         return (
-            <div className="score_compteur">
-                <p>   
+            <div className="score_compteur my-4">
+                <p>
                 Score(x{this.multiplier}) : {this.state.nb}
                 </p>
-                <button className="btn btn-warning" onClick={ ( ) => this.increment() }>
-                    +1
-                </button>
-                <button className="btn btn-danger" onClick={ ( ) => this.decrement() }>
-                    -1
-                </button>
-
             </div>
         )
     }
 }
 
 
-ReactDOM.render(
-    <Compteur />, 
-    document.getElementById('score')
-);
+ReactDOM.render(<Compteur />, document.getElementById('score'));

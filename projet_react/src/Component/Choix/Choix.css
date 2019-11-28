@@ -1,0 +1,29 @@
+.bouton {
+    width: 300px;
+    height: 150px;
+    background-color: black;
+    border: none;
+    color: #ffd119;
+}
+
+.choix_sec_js:hover { background-color: #ffd119; color: black;}
+.choix_sec_js:active { background-color: #ffd119!important; color: black }
+
+
+#arrowPlay {
+    background-color: black;
+    color: #ffd119;
+    border: none;
+}
+#arrowPlay:hover {
+    background-color: #ffd119;
+    color: black;
+}
+
+#play * {
+    width: 400px;
+    color: whitesmoke;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
