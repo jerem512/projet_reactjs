@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './Timer.css';
 
-let timer;
-
 function interpolate(from, to, progress) {
 	if(progress <= 0) {
 		return from;
@@ -15,6 +13,8 @@ function interpolate(from, to, progress) {
 }
 
 class Timer extends React.Component {
+	
+	static INSTANCE;
 	
 	constructor(props) {
 		super(props);
@@ -33,53 +33,16 @@ class Timer extends React.Component {
 		
 		this.updateState();
 		
-		timer = this;
-	}
-	
-	updateState() {
-		let newState = {};
-		for(let value of ["ticks", "time", "paused", "pauseAnimTimer"]) {
-			if(!this.state[value] || this.state[value] != this[value]) {
-				newState[value] = this[value];
-			}
-		}
-		if(Object.keys(newState).length > 0) {
-			this.setState(newState);
-		}
-	}
-	
-	getPath() {
-		let angle = Math.PI*2 * (1-(this.ticks/(this.time*60)));
-		// Pour que le zéro se trouve en haut et non à droite
-		angle = angle - Math.PI/2;
-
-		let halfSize = this.radius+this.border;
-		
-		let path = "M" + halfSize + "," + halfSize + " L" + halfSize + "," + this.border + " ";
-		// Il y a besoin de faire deux courbres quand le cercle est rempli à plus de la moitié
-		if(angle > Math.PI/2) {
-			path = path + "A" + this.radius + "," + this.radius + " 1 0,1 " + halfSize + "," + (this.radius*2 + this.border) + " ";
-		}
-		path = path + "A" + this.radius + "," + this.radius + " 1 0,1 ";
-		path = path + (halfSize + this.radius*Math.cos(angle)) + "," + (halfSize + this.radius*Math.sin(angle)) + " z";
-		
-		return path;
+		Timer.INSTANCE = this;
 	}
 	
 	componentDidMount() {
 		setInterval(() => { this.update() }, 1000/60);
 		document.body.addEventListener("keydown", function(e) {
 			if(e.key == " ") {
-				timer.toggle();
+				Timer.INSTANCE.setPaused();
 			}
 		});
-	}
-	
-	toggle() {
-		if(this.ticks < this.time*60) {
-			this.paused = !this.paused;
-		}
-		this.updateState();
 	}
 	
 	update() {
@@ -103,6 +66,44 @@ class Timer extends React.Component {
 		this.updateState();
 	}
 	
+	updateState() {
+		let newState = {};
+		for(let value of ["ticks", "time", "paused", "pauseAnimTimer"]) {
+			if(!this.state[value] || this.state[value] != this[value]) {
+				newState[value] = this[value];
+			}
+		}
+		
+		if(Object.keys(newState).length > 0) {
+			this.setState(newState);
+		}
+	}
+	
+	getPath() {
+		let angle = Math.PI*2 * (1-(this.ticks/(this.time*60)));
+		// Pour que le zéro se trouve en haut et non à droite
+		angle = angle - Math.PI/2;
+
+		let halfSize = this.radius+this.border;
+		
+		let path = "M" + halfSize + "," + halfSize + " L" + halfSize + "," + this.border + " ";
+		// Il y a besoin de faire deux courbres quand le cercle est rempli à plus de la moitié
+		if(angle > Math.PI/2) {
+			path = path + "A" + this.radius + "," + this.radius + " 1 0,1 " + halfSize + "," + (this.radius*2 + this.border) + " ";
+		}
+		path = path + "A" + this.radius + "," + this.radius + " 1 0,1 ";
+		path = path + (halfSize + this.radius*Math.cos(angle)) + "," + (halfSize + this.radius*Math.sin(angle)) + " z";
+		
+		return path;
+	}
+	
+	setPaused(paused = !this.paused) {
+		if(this.ticks < this.time*60 && this.paused != paused) {
+			this.paused = paused;
+			this.updateState();
+		}
+	}
+	
 	getPlayPausePath(i) {
 		let animProgress = this.pauseAnimTimer/15;
 		if(i == 0) {
@@ -122,10 +123,28 @@ class Timer extends React.Component {
 		}
 	}
 	
+	setTime(time) {
+		this.time = time;
+		this.ticks = 0;
+		this.updateState();
+	}
+	
+	isPaused() {
+		return this.paused;
+	}
+	
+	start() {
+		this.setPaused(false);
+	}
+	
+	stop() {
+		this.setPaused(true);
+	}
+	
 	render() {
 		return (
 			<div id="controls">
-				<svg id="playpause" onClick={() => this.toggle()}>
+				<svg id="playpause" onClick={() => this.setPaused()}>
 					<path id="pause1" d={this.getPlayPausePath(0)}></path>
 					<path id="pause2" d={this.getPlayPausePath(1)}></path>
 				</svg>
@@ -145,4 +164,7 @@ class Timer extends React.Component {
 	}
 	
 }
-ReactDOM.render(<Timer/>, document.getElementById('time'));
+
+ReactDOM.render(<Timer />, document.getElementById('time'));
+
+export default Timer;

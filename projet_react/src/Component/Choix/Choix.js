@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Timer from "../Timer/Timer";
 
 import icoAudio from './media/icoAudio.svg';
 import icoNoAudio from './media/icoNoAudio.svg';
@@ -58,6 +59,7 @@ class Choix extends React.Component {
         let thisdom = ReactDOM.findDOMNode(this);
         thisdom.querySelector("#arrowPlay").classList.add("hide");
         thisdom.querySelector("#play").classList.remove("hide");
+		Timer.INSTANCE.start();
     }
 
     validate(i) {
