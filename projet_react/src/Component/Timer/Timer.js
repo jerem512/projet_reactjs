@@ -29,31 +29,35 @@ class Timer extends React.Component {
 		
 		this.state = {};
 		
-		this.className = "";
+		this.className = "hide";
 		
 		this.updateState();
 		
 		Timer.INSTANCE = this;
 	}
 	
-	componentDidMount() {
+	init() {
 		setInterval(() => { this.update() }, 1000/60);
 		document.body.addEventListener("keydown", function(e) {
 			if(e.key == " ") {
 				Timer.INSTANCE.setPaused();
 			}
 		});
+		this.className = "d-flex";
+		this.start();
+		this.updateState();
 	}
 	
 	update() {
 		if(!this.paused) {
 			this.ticks ++;
 			if(this.ticks == this.time*60) {
-				this.paused = true;
+				alert('fin de temps');
+				this.reset();
 			} else if(this.ticks == (2*this.time/3)*60) {
-				this.className = "lowTime";
+				this.className = "d-flex lowTime";
 			} else if(this.ticks == (this.time/3)*60) {
-				this.className = "midTime";
+				this.className = "d-flex midTime";
 			}
 			if(this.pauseAnimTimer > 0) {
 				this.pauseAnimTimer --;
@@ -123,9 +127,13 @@ class Timer extends React.Component {
 		}
 	}
 	
-	setTime(time) {
-		this.time = time;
+	removeTime(time) {
+		this.time = Math.max(this.time - time, 3);
+	}
+
+	reset() {
 		this.ticks = 0;
+		this.className = "d-flex";
 		this.updateState();
 	}
 	
@@ -152,28 +160,48 @@ class Timer extends React.Component {
 	
 	render() {
 		return (
-			<div className="parentregles">
-				<div className="mx-auto rglmid my-2">
-					<button className="btn btn-warning rgl" onClick={()=> this.enterRules()}>Règles</button>
-				</div>
-				<div id="regles" className="regles hide">
-					<div>
-						<div className="">
-							<button className="btn exit" onClick={()=> this.exitRules()}>x</button>
-						</div>
-						<ul className="mt-1">
-							<li>Regle 1</li>
-							<li>Regle 1</li>
-							<li>Regle 1</li>
-							<li>Regle 1</li>
-							<li>Regle 1</li>
-							<li>Regle 1</li>
-							<li>Regle 1</li>
-							<li>Regle 1</li>
-							<li>Regle 1</li>
-							<li>Regle 1</li>
-						</ul>
+			<div>
+				<div className="parentregles">
+					<div className="mx-auto rglmid my-2">
+						<button className="btn btn-warning rgl" onClick={()=> this.enterRules()}>Règles</button>
 					</div>
+					<div id="regles" className="regles hide">
+						<div>
+							<div className="">
+								<button className="btn exit" onClick={()=> this.exitRules()}>x</button>
+							</div>
+							<ul className="mt-1">
+								<li>Regle 1</li>
+								<li>Regle 1</li>
+								<li>Regle 1</li>
+								<li>Regle 1</li>
+								<li>Regle 1</li>
+								<li>Regle 1</li>
+								<li>Regle 1</li>
+								<li>Regle 1</li>
+								<li>Regle 1</li>
+								<li>Regle 1</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="controls">
+					<svg id="playpause" onClick={() => this.setPaused()}>
+						<path id="pause1" d={this.getPlayPausePath(0)}></path>
+						<path id="pause2" d={this.getPlayPausePath(1)}></path>
+					</svg>
+					<span id="timer" className={this.className}>
+					<svg style={{width:(this.radius+this.border)*2, height:(this.radius+this.border)*2}}>
+						<clipPath id="clip">
+							<path d={this.getPath()}></path>
+						</clipPath>
+						<circle cx={this.radius+this.border} cy={this.radius+this.border} r={this.radius} style={{strokeWidth: this.border + "px"}}></circle>
+						<path d={this.getPath()}></path>
+						<circle cx={this.radius+this.border} cy={this.radius+this.border} r={this.radius} style={{strokeWidth: this.border + "px"}}></circle>
+					</svg>
+					<div style={{fontSize: this.radius/15 + "em"}} className="text">{this.time - Math.floor(this.ticks/60)}</div>
+					<div style={{fontSize: this.radius/15 + "em"}} className="text white">{this.time - Math.floor(this.ticks/60)}</div>
+				</span>
 				</div>
 			</div>
 		);

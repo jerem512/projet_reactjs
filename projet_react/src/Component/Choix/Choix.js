@@ -9,10 +9,10 @@ import icoNoAudio from './media/icoNoAudio.svg';
 import './Choix.css'
 
 let emotions = [
-    "emo1",
-    "emo2",
-    "emo3",
-    "emo4"
+    "Colère",
+    "Tristesse",
+    "Joie",
+    "Peur"
 ];
 
 function randArr(arr) {
@@ -62,16 +62,23 @@ export class Choix extends React.Component {
         thisdom.querySelector("#play").classList.remove("hide");
         thisdom.querySelector("#choix_gen_js").classList.remove("hide");
         thisdom.querySelector("#mid").classList.add("hide");
-		Timer.INSTANCE.start();
+        let timerclass = document.body.querySelector("#timer").classList;
+        timerclass.remove("hide");
+        timerclass.add("d-flex");
+		Timer.INSTANCE.init();
     }
 
     validate(i) {
         if(i == this.soundFragment) {
             Compteur.INSTANCE.increment();
+            alert('reponse juste');
+            Timer.INSTANCE.removeTime(1);
         } else {
             Compteur.INSTANCE.decrement();
+            alert('reponse fausse');
         }
         this.launch();
+        Timer.INSTANCE.reset();
     }
 
     render() {

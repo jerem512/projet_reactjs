@@ -45,7 +45,7 @@ class Compteur extends React.Component {
 
     render() {
         return (
-            <div className="">
+            <div className="score_compteur">
                 <p>
                 Score(x{this.multiplier}) : {this.state.nb}
                 </p>

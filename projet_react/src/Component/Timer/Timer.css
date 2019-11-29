@@ -16,10 +16,7 @@
 }
 
 #controls {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0.5em;
+	position: relative;
 }
 
 #playpause {
@@ -27,6 +24,9 @@
 	width: var(--btn-size);
 	height: var(--btn-size);
 	cursor: pointer;
+	position: absolute;
+	top: -40px;
+	right: 10px;
 }
 
 #playpause path {
@@ -35,9 +35,11 @@
 
 #timer {
 	position: relative;
-	width: 64px;
-	height: 64px;
-	display: block;
+	justify-content: center;
+	align-items: center;
+	width: fit-content;
+	margin: auto;
+	top: 200px;
 }
 
 #timer svg {
@@ -47,10 +49,14 @@
 	height: 64px;
 }
 
-#timer circle {
+#timer circle:last-of-type {
 	fill: transparent;
 	stroke: var(--timer-border-1);
 	transition: stroke 1s;
+}
+
+#timer circle:first-of-type {
+	fill: white;
 }
 
 #timer.midTime circle {
@@ -76,17 +82,13 @@
 
 #timer .text {
 	position: absolute;
-	font-size: 2em;
+	font-family: sans-serif;
 	font-weight: bold;
-	display: inline-block;
+	color: var(--timer-outText);
 	width: 100%;
 	height: 100%;
-	top: 0px;
-	left: 0px;
 	text-align: center;
-	vertical-align: middle;
-	line-height: 175%;
-	color: var(--timer-outText);
+	line-height: 2;
 }
 
 #timer .text.white {

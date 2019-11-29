@@ -1,6 +1,6 @@
 .bouton {
-    width: 300px;
-    height: 150px;
+    width: 500px;
+    height: 200px;
     background-color: black;
     border: none;
     color: #ffd119;
@@ -26,6 +26,8 @@
     display: block;
     margin: auto;
     text-align: center;
+    position: relative;
+    top: -90px;
 }
 
 #functions{
@@ -33,4 +35,8 @@
 }
 #mid{
     width: fit-content;
+}
+.emo{
+    font-weight: bold;
+    font-size: 2em;
 }
