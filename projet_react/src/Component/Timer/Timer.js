@@ -22,7 +22,7 @@ class Timer extends React.Component {
 		this.ticks = 0;
 		this.time = 15;
 		this.paused = true;
-		this.pauseAnimTimer = 1;
+		this.pauseAnimTimer = 0;
 		
 		this.radius = 30;
 		this.border = 2;
@@ -36,13 +36,14 @@ class Timer extends React.Component {
 		Timer.INSTANCE = this;
 	}
 	
-	componentDidMount() {
+	init() {
 		setInterval(() => { this.update() }, 1000/60);
 		document.body.addEventListener("keydown", function(e) {
 			if(e.key == " ") {
 				Timer.INSTANCE.setPaused();
 			}
 		});
+		this.start();
 	}
 	
 	update() {
@@ -106,6 +107,7 @@ class Timer extends React.Component {
 	
 	getPlayPausePath(i) {
 		let animProgress = this.pauseAnimTimer/15;
+		console.log(this.pauseAnimTimer);
 		if(i == 0) {
 			let center = interpolate(10, 15, animProgress);
 			let path = "M0 0";
@@ -121,6 +123,12 @@ class Timer extends React.Component {
 			path = path + " L" + center + " " + interpolate(30, 22.5, animProgress);
 			return path;
 		}
+	}
+	
+	setTime(time) {
+		this.time = time;
+		this.ticks = 0;
+		this.updateState();
 	}
 	
 	isPaused() {

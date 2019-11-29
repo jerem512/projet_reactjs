@@ -59,7 +59,8 @@ class Choix extends React.Component {
         let thisdom = ReactDOM.findDOMNode(this);
         thisdom.querySelector("#arrowPlay").classList.add("hide");
         thisdom.querySelector("#play").classList.remove("hide");
-		Timer.INSTANCE.start();
+        thisdom.querySelector("#choix_gen_js").classList.remove("hide");
+		Timer.INSTANCE.init();
     }
 
     validate(i) {
@@ -70,32 +71,29 @@ class Choix extends React.Component {
         }
         this.launch();
     }
-
     render() {
         return (
-            <div id="choix_gen_js" className="d-flex flex-row justify-content-around mr-auto ml-auto">
-                <div>
-                    <h2>Réponse une</h2>
-                    <button type="button" className="choix_sec_js btn btn-primary btn-lg btn-block mr-5" onClick={() => this.validate(0)}>
-                        <p className="emo">{this.emotions[0]}</p>
-                    </button>
+            <div className="mt-5">
+                <div id="functions" className="row col-12">
+                    <button id="arrowPlay" className="btn btn-warning col-md-4 mx-auto" onClick={() => this.start()}><span className="glyphicon glyphicon-play"></span>Commencez</button>
+                    <div id="play" className="hide col-md-3 mx-auto">
+                        <img src={icoAudio} alt="logo" /* className="w-100"*//>
+                        <div className="mx-auto">{this.soundFragment}</div>
+                    </div>
                 </div>
-                <div>
-                    <h2>Réponse deux</h2>
-                    <button type="button" className="choix_sec_js btn btn-primary btn-lg btn-block" onClick={() => this.validate(1)}>
-                        <p className="emo">{this.emotions[1]}</p>
-                    </button>
-                </div>
-                
-                <div id="functions" className="d-flex flex-column mr-auto ml-auto">
-                    <button id="arrowPlay" className="btn btn-info btn-lg" onClick={() => this.start()}><span className="glyphicon glyphicon-play"></span>Commencez</button>
-                    <div id="play" className="hide mr-auto ml-auto">
-                        <img src={icoAudio} alt="logo"/>
-                        <div>{this.soundFragment}</div>
+                <div id="choix_gen_js" className="hide">
+                    <h2 className="text-center mt-5">Sélectionnez une réponse (une seule est correcte).</h2>
+                    <div className="d-flex justify-content-center">
+                        <button type="button" className="btn btn-warning bouton mx-3" onClick={() => this.validate(0)}>
+                            <p className="emo">{this.emotions[0]}</p>
+                        </button>
+                        <button type="button" className="btn btn-warning bouton mx-3" onClick={() => this.validate(1)}>
+                            <p className="emo">{this.emotions[1]}</p>
+                        </button>
                     </div>
                 </div>
             </div>
-            
+
         )
     }
 }
