@@ -1,7 +1,10 @@
-
 #score{
-    color: white;
+    position: absolute;
+    right: 0px;
+    margin-top: 50px;
+    color: black;
     height: 10vh;
+    margin-bottom: 2px;
   }
 
 .score_compteur{
@@ -9,8 +12,4 @@
     font-size: 2rem;
     text-align: right;
     margin: 1em;
-}
-
-.hidden{
-  display: none;
 }

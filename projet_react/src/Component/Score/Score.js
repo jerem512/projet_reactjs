@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './Score.css';
 
+
 class Compteur extends React.Component {
     
+    static INSTANCE;
+
     constructor() {
         super()
         this.state = {
@@ -11,6 +14,8 @@ class Compteur extends React.Component {
         }
         this.multiplier = 1;
         this.combo = 0;
+
+        Compteur.INSTANCE = this;
     }
 
     increment() {
@@ -21,17 +26,18 @@ class Compteur extends React.Component {
                 this.multiplier *= 2;
             }
         }*/
-        this.combo ++;
-        this.multiplier = Math.pow(2, Math.min(this.combo - 1, 3));
-        //this.multiplier = Math.pow(2, this.combo - 1);
-        this.setState({
-            nb: this.state.nb + 1 * this.multiplier    
-        });
-    }
+            this.combo ++;
+            this.multiplier = Math.pow(2, Math.min(this.combo - 1, 3));
+            //this.multiplier = Math.pow(2, this.combo - 1);
+            this.setState({
+                nb: this.state.nb + 1 * this.multiplier    
+            });
+    
+}
 
     decrement() {
         this.setState({
-            nb: this.state.nb - 1
+            nb: this.state.nb
         })
         this.combo = 0;
         this.multiplier = 1;
@@ -39,24 +45,16 @@ class Compteur extends React.Component {
 
     render() {
         return (
-            <div className="score_compteur">
-                <p>   
+            <div className="score_compteur my-4">
+                <p>
                 Score(x{this.multiplier}) : {this.state.nb}
                 </p>
-                <button className="btn btn-warning" onClick={ ( ) => this.increment() }>
-                    +1
-                </button>
-                <button className="btn btn-danger" onClick={ ( ) => this.decrement() }>
-                    -1
-                </button>
-
             </div>
         )
     }
 }
 
 
-ReactDOM.render(
-    <Compteur />, 
-    document.getElementById('score')
-);
+ReactDOM.render(<Compteur />, document.getElementById('score'));
+
+export default Compteur;
