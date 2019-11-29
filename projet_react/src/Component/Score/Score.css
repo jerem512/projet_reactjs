@@ -1,15 +1,7 @@
 #score{
-    position: absolute;
-    right: 0px;
-    margin-top: 50px;
-    color: black;
-    height: 10vh;
-    margin-bottom: 2px;
+
   }
 
 .score_compteur{
-    font-weight: bold;
-    font-size: 2rem;
-    text-align: right;
-    margin: 1em;
+    display: inline-block;
 }

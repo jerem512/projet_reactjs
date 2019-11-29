@@ -31,3 +31,6 @@
 #functions{
     margin-left: 0 !important; 
 }
+#mid{
+    width: fit-content;
+}

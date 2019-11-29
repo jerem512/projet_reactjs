@@ -22,10 +22,10 @@ class Timer extends React.Component {
 		this.ticks = 0;
 		this.time = 15;
 		this.paused = true;
-		this.pauseAnimTimer = 0;
+		this.pauseAnimTimer = 1;
 		
-		this.radius = 30;
-		this.border = 2;
+		this.radius = 50;
+		this.border = 3;
 		
 		this.state = {};
 		
@@ -36,14 +36,13 @@ class Timer extends React.Component {
 		Timer.INSTANCE = this;
 	}
 	
-	init() {
+	componentDidMount() {
 		setInterval(() => { this.update() }, 1000/60);
 		document.body.addEventListener("keydown", function(e) {
 			if(e.key == " ") {
 				Timer.INSTANCE.setPaused();
 			}
 		});
-		this.start();
 	}
 	
 	update() {
@@ -107,7 +106,6 @@ class Timer extends React.Component {
 	
 	getPlayPausePath(i) {
 		let animProgress = this.pauseAnimTimer/15;
-		console.log(this.pauseAnimTimer);
 		if(i == 0) {
 			let center = interpolate(10, 15, animProgress);
 			let path = "M0 0";
@@ -151,15 +149,16 @@ class Timer extends React.Component {
 					<path id="pause2" d={this.getPlayPausePath(1)}></path>
 				</svg>
 				<span id="timer" className={this.className}>
-					<svg>
+					<svg style={{width:(this.radius+this.border)*2, height:(this.radius+this.border)*2}}>
 						<clipPath id="clip">
 							<path d={this.getPath()}></path>
 						</clipPath>
+						<circle cx={this.radius+this.border} cy={this.radius+this.border} r={this.radius} style={{strokeWidth: this.border + "px"}}></circle>
 						<path d={this.getPath()}></path>
 						<circle cx={this.radius+this.border} cy={this.radius+this.border} r={this.radius} style={{strokeWidth: this.border + "px"}}></circle>
 					</svg>
-					<div className="text">{this.time - Math.floor(this.ticks/60)}</div>
-					<div className="text white">{this.time - Math.floor(this.ticks/60)}</div>
+					<div style={{fontSize: this.radius/15 + "em"}} className="text">{this.time - Math.floor(this.ticks/60)}</div>
+					<div style={{fontSize: this.radius/15 + "em"}} className="text white">{this.time - Math.floor(this.ticks/60)}</div>
 				</span>
 			</div>
 		);
