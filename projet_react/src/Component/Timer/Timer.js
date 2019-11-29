@@ -24,8 +24,8 @@ class Timer extends React.Component {
 		this.paused = true;
 		this.pauseAnimTimer = 1;
 		
-		this.radius = 30;
-		this.border = 2;
+		this.radius = 45;
+		this.border = 3;
 		
 		this.state = {};
 		
@@ -140,25 +140,41 @@ class Timer extends React.Component {
 	stop() {
 		this.setPaused(true);
 	}
+
+	enterRules(){
+		let thisdom = ReactDOM.findDOMNode(this);
+		thisdom.querySelector("#regles").classList.remove("hide");
+	}
+	exitRules(){
+		let thisdom = ReactDOM.findDOMNode(this);
+		thisdom.querySelector("#regles").classList.add("hide");
+	}
 	
 	render() {
 		return (
-			<div id="controls">
-				<svg id="playpause" onClick={() => this.setPaused()}>
-					<path id="pause1" d={this.getPlayPausePath(0)}></path>
-					<path id="pause2" d={this.getPlayPausePath(1)}></path>
-				</svg>
-				<span id="timer" className={this.className}>
-					<svg>
-						<clipPath id="clip">
-							<path d={this.getPath()}></path>
-						</clipPath>
-						<path d={this.getPath()}></path>
-						<circle cx={this.radius+this.border} cy={this.radius+this.border} r={this.radius} style={{strokeWidth: this.border + "px"}}></circle>
-					</svg>
-					<div className="text">{this.time - Math.floor(this.ticks/60)}</div>
-					<div className="text white">{this.time - Math.floor(this.ticks/60)}</div>
-				</span>
+			<div className="parentregles">
+				<div className="mx-auto rglmid my-2">
+					<button className="btn btn-warning rgl" onClick={()=> this.enterRules()}>Règles</button>
+				</div>
+				<div id="regles" className="regles hide">
+					<div>
+						<div className="">
+							<button className="btn exit" onClick={()=> this.exitRules()}>x</button>
+						</div>
+						<ul className="mt-1">
+							<li>Regle 1</li>
+							<li>Regle 1</li>
+							<li>Regle 1</li>
+							<li>Regle 1</li>
+							<li>Regle 1</li>
+							<li>Regle 1</li>
+							<li>Regle 1</li>
+							<li>Regle 1</li>
+							<li>Regle 1</li>
+							<li>Regle 1</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		);
 	}

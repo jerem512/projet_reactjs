@@ -94,3 +94,36 @@
 	clip-path: url(#clip);
 	text-shadow: -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black, 1px 1px 1px black;
 }
+.rgl{
+	background-color: black;
+	border: none;
+	color: #ffd119;
+}
+.rglmid{
+	width: fit-content;
+}
+.regles{
+	display: block;
+	background-color: black;
+	color: #ffd119;
+	vertical-align: middle;
+	width: 200px;
+	position: absolute;
+	top: 36px;
+	left: 50%;
+	transform: translateX(-50%);
+	border: 1px solid black;
+	z-index: 1;
+}
+.hide{
+	display: none;
+}
+.exit{
+	color: #ffd119;
+	background-color: black;
+	font-size: 20px;
+	border: 1px solid #ffd119;
+}
+.parentregles{
+	position: relative;
+}
