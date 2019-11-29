@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Timer from "../Timer/Timer";
+import Score from  "../Score/Score";
 
 import icoAudio from './media/icoAudio.svg';
 import icoNoAudio from './media/icoNoAudio.svg';
@@ -60,6 +61,7 @@ class Choix extends React.Component {
         thisdom.querySelector("#arrowPlay").classList.add("hide");
         thisdom.querySelector("#play").classList.remove("hide");
         thisdom.querySelector("#choix_gen_js").classList.remove("hide");
+        thisdom.querySelector("#mid").classList.add("hide");
 		Timer.INSTANCE.start();
     }
 
@@ -74,6 +76,7 @@ class Choix extends React.Component {
     render() {
         return (
             <div className="mt-5">
+                <legend id="mid" className="mx-auto">Le test commence directement à l'appui du bouton "commencez".</legend>
                 <div id="functions" className="row col-12">
                     <button id="arrowPlay" className="btn btn-warning col-md-4 mx-auto" onClick={() => this.start()}><span className="glyphicon glyphicon-play"></span>Commencez</button>
                     <div id="play" className="hide col-md-3 mx-auto">
