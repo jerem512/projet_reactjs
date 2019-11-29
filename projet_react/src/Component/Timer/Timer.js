@@ -163,24 +163,18 @@ class Timer extends React.Component {
 			<div>
 				<div className="parentregles">
 					<div className="mx-auto rglmid my-2">
-						<button className="btn btn-warning rgl" onClick={()=> this.enterRules()}>Règles</button>
+						<button id="rules" className="btn btn-warning rgl" onClick={()=> this.enterRules()}>Règles</button>
 					</div>
 					<div id="regles" className="regles hide">
 						<div>
-							<div className="">
+							<div>
 								<button className="btn exit" onClick={()=> this.exitRules()}>x</button>
 							</div>
 							<ul className="mt-1">
-								<li>Regle 1</li>
-								<li>Regle 1</li>
-								<li>Regle 1</li>
-								<li>Regle 1</li>
-								<li>Regle 1</li>
-								<li>Regle 1</li>
-								<li>Regle 1</li>
-								<li>Regle 1</li>
-								<li>Regle 1</li>
-								<li>Regle 1</li>
+								<legend><u>Objectifs pédagogiques :</u></legend>
+								<li>Savoir identifier une émotion à la voix</li>
+								<li>Savoir reconnaître le besoin lié à une émotion</li>
+								<li>Savoir réagir à un besoin exprimé par une émotion</li>
 							</ul>
 						</div>
 					</div>

@@ -62,9 +62,7 @@ export class Choix extends React.Component {
         thisdom.querySelector("#play").classList.remove("hide");
         thisdom.querySelector("#choix_gen_js").classList.remove("hide");
         thisdom.querySelector("#mid").classList.add("hide");
-        let timerclass = document.body.querySelector("#timer").classList;
-        timerclass.remove("hide");
-        timerclass.add("d-flex");
+        document.body.querySelector("#rules").classList.add("hide");
 		Timer.INSTANCE.init();
     }
 

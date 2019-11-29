@@ -24,8 +24,8 @@
 	width: var(--btn-size);
 	height: var(--btn-size);
 	cursor: pointer;
-	position: absolute;
-	top: -40px;
+	position: fixed;
+	top: 70px;
 	right: 10px;
 }
 
@@ -109,13 +109,14 @@
 	background-color: black;
 	color: #ffd119;
 	vertical-align: middle;
-	width: 200px;
 	position: absolute;
 	top: 36px;
 	left: 50%;
 	transform: translateX(-50%);
 	border: 1px solid black;
 	z-index: 1;
+	padding: 10px;
+	border: 1px solid #ffd119;
 }
 .hide{
 	display: none;
