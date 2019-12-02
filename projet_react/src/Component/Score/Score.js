@@ -14,16 +14,18 @@ class Compteur extends React.Component {
         }
         this.multiplier = 1;
         this.combo = 0;
+		this.basePts = 1;
 
         Compteur.INSTANCE = this;
     }
 
     increment() {
+		this.setState({
+			nb: this.state.nb + (this.basePts * this.multiplier)
+		});
 		this.combo ++;
 		this.multiplier = Math.pow(2, Math.min(this.combo - 1, 3));
-		this.setState({
-			nb: this.state.nb + 1 * this.multiplier    
-		});
+		this.basePts ++;
     
 }
 
