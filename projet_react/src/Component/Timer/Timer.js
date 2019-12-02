@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './Timer.css';
+import Choix from "../Choix/Choix";
 
 function interpolate(from, to, progress) {
 	if(progress <= 0) {
@@ -24,36 +25,39 @@ class Timer extends React.Component {
 		this.paused = true;
 		this.pauseAnimTimer = 0;
 		
-		this.radius = 50;
+		this.radius = 45;
 		this.border = 3;
 		
 		this.state = {};
 		
-		this.className = "";
+		this.className = "hide";
 		
 		this.updateState();
 		
 		Timer.INSTANCE = this;
 	}
 	
-	componentDidMount() {
+	init() {
 		setInterval(() => { this.update() }, 1000/60);
 		document.body.addEventListener("keydown", function(e) {
 			if(e.key == " ") {
 				Timer.INSTANCE.setPaused();
 			}
 		});
+		this.className = "d-flex";
+		this.updateState();
 	}
 	
 	update() {
 		if(!this.paused) {
 			this.ticks ++;
 			if(this.ticks == this.time*60) {
-				this.paused = true;
+				Choix.INSTANCE.launch();
+				this.reset();
 			} else if(this.ticks == (2*this.time/3)*60) {
-				this.className = "lowTime";
+				this.className = "d-flex lowTime";
 			} else if(this.ticks == (this.time/3)*60) {
-				this.className = "midTime";
+				this.className = "d-flex midTime";
 			}
 			if(this.pauseAnimTimer > 0) {
 				this.pauseAnimTimer --;
@@ -123,9 +127,14 @@ class Timer extends React.Component {
 		}
 	}
 	
-	setTime(time) {
-		this.time = time;
+	removeTime(time) {
+		this.time = Math.max(this.time - time, 3);
+	}
+
+	reset() {
 		this.ticks = 0;
+		this.className = "d-flex";
+		this.stop();
 		this.updateState();
 	}
 	
@@ -140,15 +149,43 @@ class Timer extends React.Component {
 	stop() {
 		this.setPaused(true);
 	}
+
+	enterRules(){
+		let thisdom = ReactDOM.findDOMNode(this);
+		thisdom.querySelector("#regles").classList.remove("hide");
+	}
+	exitRules(){
+		let thisdom = ReactDOM.findDOMNode(this);
+		thisdom.querySelector("#regles").classList.add("hide");
+	}
 	
 	render() {
 		return (
-			<div id="controls">
-				<svg id="playpause" onClick={() => this.setPaused()}>
-					<path id="pause1" d={this.getPlayPausePath(0)}></path>
-					<path id="pause2" d={this.getPlayPausePath(1)}></path>
-				</svg>
-				<span id="timer" className={this.className}>
+			<div>
+				<div className="parentregles">
+					<div className="mx-auto rglmid my-2">
+						<button id="rules" className="btn btn-warning rgl" onClick={()=> this.enterRules()}>Règles</button>
+					</div>
+					<div id="regles" className="regles hide">
+						<div>
+							<div>
+								<button className="btn exit" onClick={()=> this.exitRules()}>x</button>
+							</div>
+							<ul className="mt-1">
+								<legend><u>Objectifs pédagogiques :</u></legend>
+								<li>Savoir identifier une émotion à la voix</li>
+								<li>Savoir reconnaître le besoin lié à une émotion</li>
+								<li>Savoir réagir à un besoin exprimé par une émotion</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="controls">
+					<svg id="playpause" onClick={() => this.setPaused()}>
+						<path id="pause1" d={this.getPlayPausePath(0)}></path>
+						<path id="pause2" d={this.getPlayPausePath(1)}></path>
+					</svg>
+					<span id="timer" className={this.className}>
 					<svg style={{width:(this.radius+this.border)*2, height:(this.radius+this.border)*2}}>
 						<clipPath id="clip">
 							<path d={this.getPath()}></path>
@@ -160,6 +197,7 @@ class Timer extends React.Component {
 					<div style={{fontSize: this.radius/15 + "em"}} className="text">{this.time - Math.floor(this.ticks/60)}</div>
 					<div style={{fontSize: this.radius/15 + "em"}} className="text white">{this.time - Math.floor(this.ticks/60)}</div>
 				</span>
+				</div>
 			</div>
 		);
 	}
