@@ -25,7 +25,7 @@ class Compteur extends React.Component {
 		});
 		this.combo ++;
 		this.multiplier = Math.pow(2, Math.min(this.combo - 1, 3));
-		this.basePts ++;
+		this.basePts = Math.min(this.basePts + 1, 13);
     
 }
 
