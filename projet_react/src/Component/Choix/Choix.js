@@ -91,8 +91,12 @@ export class Choix extends React.Component {
             Compteur.INSTANCE.decrement();
             alert('reponse fausse');
         }
+		for(let btn of document.body.querySelectorAll("button.btn")) {
+			btn.blur();
+		}
         this.launch();
         Timer.INSTANCE.reset();
+		Timer.INSTANCE.stop();
     }
 	
 	audioEnd() {
