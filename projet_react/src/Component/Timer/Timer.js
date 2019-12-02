@@ -44,7 +44,7 @@ class Timer extends React.Component {
 		setInterval(() => { this.update() }, 1000/60);
 		document.body.addEventListener("keydown", function(e) {
 			if(e.key == " ") {
-				Timer.INSTANCE.setPaused();
+				Timer.INSTANCE.pauseClick();
 			}
 		});
 		this.className = "d-flex";
@@ -110,9 +110,16 @@ class Timer extends React.Component {
 	}
 	
 	setPaused(paused = !this.paused) {
-		if(!this.frozen && this.ticks < this.time*60 && this.paused != paused) {
+		if(this.ticks < this.time*60 && this.paused != paused) {
 			this.paused = paused;
 			this.updateState();
+		}
+	}
+	
+	pauseClick() {
+		if(!this.frozen) {
+			this.setPaused();
+			document.getElementById("pauseText").classList[this.paused ? "remove" : "add"]("hide");
 		}
 	}
 	
@@ -199,7 +206,7 @@ class Timer extends React.Component {
 					</div>
 				</div>
 				<div id="controls">
-					<svg id="playpause" onClick={() => this.setPaused()}>
+					<svg id="playpause" onClick={() => this.pauseClick()}>
 						<path id="pause1" d={this.getPlayPausePath(0)}></path>
 						<path id="pause2" d={this.getPlayPausePath(1)}></path>
 					</svg>
