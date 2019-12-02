@@ -1,6 +1,7 @@
 .score_compteur{
     position: absolute;
-    top: 175px;
+    top: 50px;
+    left: 10px;
     font-weight: bold;
     font-size: 2rem;
 }

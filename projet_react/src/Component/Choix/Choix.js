@@ -81,13 +81,20 @@ export class Choix extends React.Component {
 
     validate(i) {
         if(!Timer.INSTANCE.isPaused()) {
+            let answer = document.querySelector("#answer");
+            answer.classList.remove("invisible");
             if(i == this.soundFragment) {
                 Compteur.INSTANCE.increment();
-                //alert('reponse juste');
                 Timer.INSTANCE.removeTime(1);
+
+                answer.classList.remove("answerWrong");
+                answer.classList.add("answerGood");
+                answer.textContent = "Bonne réponse !";
             } else {
                 Compteur.INSTANCE.decrement();
-                //alert('reponse fausse');
+                answer.classList.remove("answerGood");
+                answer.classList.add("answerWrong");
+                answer.textContent = "Mauvaise réponse !";
             }
             for(let btn of document.body.querySelectorAll("button.btn")) {
                 btn.blur();
@@ -122,6 +129,7 @@ export class Choix extends React.Component {
                     </div>
                     <div id="choix_gen_js" className="hide">
                         <h2 className="text-center mt-5">Sélectionnez une réponse (une seule est correcte).</h2>
+                        <p id="answer" className="invisible">Aucune réponse</p>
                         <div className="d-flex justify-content-center">
                             <button type="button" className="btn bouton mx-3" style={{backgroundColor: this.emotions[0][2]}} onClick={() => this.validate(0)}>
                                 <p className="emo">{this.emotions[0][0]}</p>

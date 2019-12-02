@@ -57,6 +57,10 @@ class Timer extends React.Component {
 			if(this.ticks == this.time*60) {
 				Compteur.INSTANCE.decrement();
 				Choix.INSTANCE.launch();
+				let answer = document.querySelector("#answer");
+				answer.classList.remove("answerGood");
+				answer.classList.add("answerWrong");
+				answer.textContent = "Temps écoulé !";
 				this.reset();
 			} else if(this.ticks == (2*this.time/3)*60) {
 				this.className = "d-flex lowTime";
@@ -106,15 +110,10 @@ class Timer extends React.Component {
 	}
 	
 	setPaused(paused = !this.paused) {
-		if(!this.frozen && (this.ticks < this.time*60 && this.paused != paused)) {
+		if(!this.frozen && this.ticks < this.time*60 && this.paused != paused) {
 			this.paused = paused;
 			this.updateState();
 		}
-	}
-	
-	pauseBtnClick() {
-		this.setPaused();
-		document.getElementById("pauseText").classList[this.paused ? "remove" : "add"]("hide");
 	}
 	
 	getPlayPausePath(i) {
@@ -161,10 +160,12 @@ class Timer extends React.Component {
 	
 	freeze() {
 		this.frozen = true;
+		this.stop();
 	}
 	
 	unfreeze() {
 		this.frozen = false;
+		this.start();
 	}
 
 	enterRules(){
@@ -198,7 +199,7 @@ class Timer extends React.Component {
 					</div>
 				</div>
 				<div id="controls">
-					<svg id="playpause" onClick={() => this.pauseBtnClick()}>
+					<svg id="playpause" onClick={() => this.setPaused()}>
 						<path id="pause1" d={this.getPlayPausePath(0)}></path>
 						<path id="pause2" d={this.getPlayPausePath(1)}></path>
 					</svg>
