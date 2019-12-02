@@ -1,15 +1,13 @@
 .bouton {
     width: 500px;
     height: 200px;
-    background-color: black;
-    border: none;
-    color: #ffd119;
+    border: 1px solid black;
+	color: whitesmoke;
 }
-
-.choix_sec_js:hover { background-color: #ffd119; color: black;}
-.choix_sec_js:active { background-color: #ffd119!important; color: black }
-
-
+.bouton:hover{
+    color: black;
+    border: 3px solid black;
+}
 #arrowPlay {
     background-color: black;
     color: #ffd119;
@@ -27,8 +25,13 @@
     margin: auto;
     text-align: center;
     position: relative;
-    top: -90px;
 }
+#play{
+    position: relative;
+    top: -90px;
+    cursor: pointer;
+}
+
 
 #functions{
     margin-left: 0 !important; 
@@ -39,12 +42,4 @@
 .emo{
     font-weight: bold;
     font-size: 2em;
-}
-h2{
-    font-size: 2rem;
-    font-weight: bold;
-}
-h1{
-    font-size: 2.5rem;
-    font-weight: bold;
 }

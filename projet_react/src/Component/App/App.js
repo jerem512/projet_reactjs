@@ -8,7 +8,7 @@ import '../Score/Score';
 
         function App() {
             return (
-                <div className="App">
+                <div>
                     <header className="App-header">
                         <h1>Premier niveau</h1>
                     </header>
