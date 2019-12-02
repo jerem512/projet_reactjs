@@ -2,16 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Timer from "../Timer/Timer";
 import Compteur from "../Score/Score";
-
 import icoAudio from './media/icoAudio.svg';
-import icoNoAudio from './media/icoNoAudio.svg';
-
 import colere from "../../audio/colere.ogg";
 import joie from "../../audio/joie.ogg";
 import peur from "../../audio/peur.ogg";
 import tristesse from "../../audio/tristesse.ogg";
 
-import './Choix.css'
+import './Choix.css';
 
 let emotions = [
     ["Colère", colere, "red"],
@@ -83,26 +80,35 @@ export class Choix extends React.Component {
     }
 
     validate(i) {
-        if(i == this.soundFragment) {
-            Compteur.INSTANCE.increment();
-            alert('reponse juste');
-            Timer.INSTANCE.removeTime(1);
-        } else {
-            Compteur.INSTANCE.decrement();
-            alert('reponse fausse');
+        if(!Timer.INSTANCE.isPaused()) {
+            if(i == this.soundFragment) {
+                Compteur.INSTANCE.increment();
+                alert('reponse juste');
+                Timer.INSTANCE.removeTime(1);
+            } else {
+                Compteur.INSTANCE.decrement();
+                alert('reponse fausse');
+            }
+            for(let btn of document.body.querySelectorAll("button.btn")) {
+                btn.blur();
+            }
+            this.launch();
+            Timer.INSTANCE.reset();
+            Timer.INSTANCE.stop();
         }
-		for(let btn of document.body.querySelectorAll("button.btn")) {
-			btn.blur();
-		}
-        this.launch();
-        Timer.INSTANCE.reset();
-		Timer.INSTANCE.stop();
     }
 	
 	audioEnd() {
 		Timer.INSTANCE.unfreeze();
 		Timer.INSTANCE.start();
 	}
+
+	audioRestart(){
+        if(!Timer.INSTANCE.isPaused()) {
+            document.getElementById("emotionPlayer").play();
+			Timer.INSTANCE.stop();
+        }
+    }
 
     render() {
         return (
@@ -112,8 +118,7 @@ export class Choix extends React.Component {
                     <div id="functions" className="row col-12">
                         <button id="arrowPlay" className="btn btn-warning col-md-4 mx-auto" onClick={() => this.start()}><span className="glyphicon glyphicon-play"></span>Commencez</button>
                         <div id="play" className="hide mx-auto">
-                            <img src={icoAudio} alt="logo" />
-                            <div className="mx-auto">{this.soundFragment}</div>
+                            <img src={icoAudio} alt="logo" onClick={this.audioRestart}/>
                         </div>
                     </div>
                     <div id="choix_gen_js" className="hide">

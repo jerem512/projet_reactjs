@@ -110,6 +110,7 @@ class Timer extends React.Component {
 			this.paused = paused;
 			this.updateState();
 		}
+		console.error(paused);
 	}
 	
 	getPlayPausePath(i) {
