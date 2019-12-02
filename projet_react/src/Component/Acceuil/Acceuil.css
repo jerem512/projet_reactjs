@@ -57,8 +57,11 @@ a{
 	height: 100vh;
 	backdrop-filter: blur(5px);
 	background: rgba(255, 255, 255, 0.25);
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	z-index: 2;
+}
+
+#pauseText:not(.hide) {
+	display: flex;
 }
