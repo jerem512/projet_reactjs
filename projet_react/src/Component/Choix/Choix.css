@@ -43,3 +43,24 @@
     font-weight: bold;
     font-size: 2em;
 }
+
+#answer{
+    text-align: center;
+    margin-right: 25%;
+    margin-left: 25% ;
+    border-radius: 5px;
+    font-size: larger;
+    font-weight: bold;
+}
+.answerGood{
+    color: #00B300;
+    background-color: darkgreen;
+}
+.answerWrong{
+    color: red;
+    background-color: darkred;
+}
+.invisible{
+    background-color: transparent;
+    color: transparent;
+}

@@ -57,6 +57,10 @@ class Timer extends React.Component {
 			if(this.ticks == this.time*60) {
 				Compteur.INSTANCE.decrement();
 				Choix.INSTANCE.launch();
+				let answer = document.querySelector("#answer");
+				answer.classList.remove("answerGood");
+				answer.classList.add("answerWrong");
+				answer.textContent = "Temps écoulé !";
 				this.reset();
 			} else if(this.ticks == (2*this.time/3)*60) {
 				this.className = "d-flex lowTime";
