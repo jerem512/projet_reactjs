@@ -54,6 +54,7 @@ export class Choix extends React.Component {
 		let player = ReactDOM.findDOMNode(this).querySelector("#emotionPlayer");
 		player.setAttribute("src", this.emotions[this.soundFragment][1]);
 		player.play();
+		Timer.INSTANCE.freeze();
     }
 
     updateState() {
@@ -93,6 +94,11 @@ export class Choix extends React.Component {
         this.launch();
         Timer.INSTANCE.reset();
     }
+	
+	audioEnd() {
+		Timer.INSTANCE.unfreeze();
+		Timer.INSTANCE.start();
+	}
 
     render() {
         return (
@@ -118,8 +124,7 @@ export class Choix extends React.Component {
                         </div>
                     </div>
                 </div>
-				//https://dl.dropboxusercontent.com/s/1glz5gg9x0y8dbk/princessmusicsmb2j.ogg
-				<audio id="emotionPlayer" onEnded={() => Timer.INSTANCE.start()}></audio>
+				<audio id="emotionPlayer" onEnded={this.audioEnd}></audio>
             </div>
 
         )

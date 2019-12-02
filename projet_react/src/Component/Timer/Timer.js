@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './Timer.css';
 import Choix from "../Choix/Choix";
+import Compteur from "../Score/Score";
 
 function interpolate(from, to, progress) {
 	if(progress <= 0) {
@@ -23,12 +24,14 @@ class Timer extends React.Component {
 		this.ticks = 0;
 		this.time = 15;
 		this.paused = true;
-		this.pauseAnimTimer = 0;
+		this.pauseAnimTimer = 15;
 		
 		this.radius = 45;
 		this.border = 3;
 		
 		this.state = {};
+		
+		this.frozen = false;
 		
 		this.className = "hide";
 		
@@ -52,6 +55,7 @@ class Timer extends React.Component {
 		if(!this.paused) {
 			this.ticks ++;
 			if(this.ticks == this.time*60) {
+				Compteur.INSTANCE.decrement();
 				Choix.INSTANCE.launch();
 				this.reset();
 			} else if(this.ticks == (2*this.time/3)*60) {
@@ -102,7 +106,7 @@ class Timer extends React.Component {
 	}
 	
 	setPaused(paused = !this.paused) {
-		if(this.ticks < this.time*60 && this.paused != paused) {
+		if(!this.frozen && this.ticks < this.time*60 && this.paused != paused) {
 			this.paused = paused;
 			this.updateState();
 		}
@@ -148,6 +152,14 @@ class Timer extends React.Component {
 	
 	stop() {
 		this.setPaused(true);
+	}
+	
+	freeze() {
+		this.frozen = true;
+	}
+	
+	unfreeze() {
+		this.frozen = false;
 	}
 
 	enterRules(){
