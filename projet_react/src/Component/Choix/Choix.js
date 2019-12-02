@@ -119,10 +119,10 @@ export class Choix extends React.Component {
                     <div id="choix_gen_js" className="hide">
                         <h2 className="text-center mt-5">Sélectionnez une réponse (une seule est correcte).</h2>
                         <div className="d-flex justify-content-center">
-                            <button type="button" className="btn btn-warning bouton mx-3" style={{backgroundColor: this.emotions[0][2]}} onClick={() => this.validate(0)}>
+                            <button type="button" className="btn bouton mx-3" style={{backgroundColor: this.emotions[0][2]}} onClick={() => this.validate(0)}>
                                 <p className="emo">{this.emotions[0][0]}</p>
                             </button>
-                            <button type="button" className="btn btn-warning bouton mx-3" style={{backgroundColor: this.emotions[1][2]}} onClick={() => this.validate(1)}>
+                            <button type="button" className="btn bouton mx-3" style={{backgroundColor: this.emotions[1][2]}} onClick={() => this.validate(1)}>
                                 <p className="emo">{this.emotions[1][0]}</p>
                             </button>
                         </div>
