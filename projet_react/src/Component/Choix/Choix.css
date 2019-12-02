@@ -1,9 +1,8 @@
 .bouton {
     width: 500px;
     height: 200px;
-    background-color: black;
-    border: none;
-    color: #ffd119;
+    border: 1px solid black;
+	color: whitesmoke;
 }
 
 .choix_sec_js:hover { background-color: #ffd119; color: black;}
