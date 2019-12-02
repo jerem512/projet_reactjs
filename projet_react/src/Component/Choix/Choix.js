@@ -83,18 +83,18 @@ export class Choix extends React.Component {
         if(!Timer.INSTANCE.isPaused()) {
             if(i == this.soundFragment) {
                 Compteur.INSTANCE.increment();
-                alert('reponse juste');
+                //alert('reponse juste');
                 Timer.INSTANCE.removeTime(1);
             } else {
                 Compteur.INSTANCE.decrement();
-                alert('reponse fausse');
+                //alert('reponse fausse');
             }
             for(let btn of document.body.querySelectorAll("button.btn")) {
                 btn.blur();
             }
-            this.launch();
-            Timer.INSTANCE.reset();
+			Timer.INSTANCE.reset();
             Timer.INSTANCE.stop();
+            this.launch();
         }
     }
 	
@@ -106,7 +106,6 @@ export class Choix extends React.Component {
 	audioRestart(){
         if(!Timer.INSTANCE.isPaused()) {
             document.getElementById("emotionPlayer").play();
-			Timer.INSTANCE.stop();
         }
     }
 

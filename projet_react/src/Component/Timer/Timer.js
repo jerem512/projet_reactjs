@@ -106,11 +106,10 @@ class Timer extends React.Component {
 	}
 	
 	setPaused(paused = !this.paused) {
-		if(!this.frozen && this.ticks < this.time*60 && this.paused != paused) {
+		if(!this.frozen && (this.ticks < this.time*60 && this.paused != paused)) {
 			this.paused = paused;
 			this.updateState();
 		}
-		console.error(paused);
 	}
 	
 	getPlayPausePath(i) {
