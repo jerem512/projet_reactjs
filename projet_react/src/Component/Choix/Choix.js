@@ -99,9 +99,9 @@ export class Choix extends React.Component {
             for(let btn of document.body.querySelectorAll("button.btn")) {
                 btn.blur();
             }
-            this.launch();
-            Timer.INSTANCE.reset();
+			Timer.INSTANCE.reset();
             Timer.INSTANCE.stop();
+            this.launch();
         }
     }
 	

@@ -25,11 +25,14 @@ class Acceuil extends React.Component {
         return(
 
             <div>
-                <div  className={ divClass.join(' ')}>
+                <div className={ divClass.join(' ')}>
                     <div className={ boxClass.join(' ')} onClick={this.toggle.bind(this)}>
                         <p className="jouer">JOUER</p>
                     </div>
                 </div>
+				<div id="pauseText" className="hide">
+					<p>PAUSE</p>
+				</div>
             </div>
 
         );

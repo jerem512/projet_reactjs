@@ -46,3 +46,22 @@ a{
 .show{
     display: block;
 }
+
+#pauseText {
+	position: absolute;
+	font-size: 7em;
+	font-weight: bold;
+	color: white;
+	text-shadow: -2px -2px 2px black, 2px -2px 2px black, -2px 2px 2px black, 2px 2px 2px black;
+	width: 100vw;
+	height: 100vh;
+	backdrop-filter: blur(5px);
+	background: rgba(255, 255, 255, 0.25);
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+}
+
+#pauseText:not(.hide) {
+	display: flex;
+}
