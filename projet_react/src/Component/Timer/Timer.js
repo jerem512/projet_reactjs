@@ -22,7 +22,7 @@ class Timer extends React.Component {
 		this.ticks = 0;
 		this.time = 15;
 		this.paused = true;
-		this.pauseAnimTimer = 1;
+		this.pauseAnimTimer = 0;
 		
 		this.radius = 45;
 		this.border = 3;
