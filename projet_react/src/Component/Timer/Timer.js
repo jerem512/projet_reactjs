@@ -112,6 +112,11 @@ class Timer extends React.Component {
 		}
 	}
 	
+	pauseBtnClick() {
+		this.setPaused();
+		document.getElementById("pauseText").classList[this.paused ? "remove" : "add"]("hide");
+	}
+	
 	getPlayPausePath(i) {
 		let animProgress = this.pauseAnimTimer/15;
 		if(i == 0) {
@@ -193,7 +198,7 @@ class Timer extends React.Component {
 					</div>
 				</div>
 				<div id="controls">
-					<svg id="playpause" onClick={() => this.setPaused()}>
+					<svg id="playpause" onClick={() => this.pauseBtnClick()}>
 						<path id="pause1" d={this.getPlayPausePath(0)}></path>
 						<path id="pause2" d={this.getPlayPausePath(1)}></path>
 					</svg>

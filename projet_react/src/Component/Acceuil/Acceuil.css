@@ -46,3 +46,14 @@ a{
 .show{
     display: block;
 }
+
+#pauseText {
+	font-size: 7em;
+	font-weight: bold;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: white;
+	text-shadow: -2px -2px 2px black, 2px -2px 2px black, -2px 2px 2px black, 2px 2px 2px black;
+}
