@@ -4,7 +4,7 @@ import './Score.css';
 
 
 class Compteur extends React.Component {
-    
+
     static INSTANCE;
 
     constructor() {
@@ -14,23 +14,25 @@ class Compteur extends React.Component {
         }
         this.multiplier = 1;
         this.combo = 0;
+        this.basePts = 1;
 
         Compteur.INSTANCE = this;
     }
 
     increment() {
-		this.combo ++;
-		this.multiplier = Math.pow(2, Math.min(this.combo - 1, 3));
-		this.setState({
-			nb: this.state.nb + 1 * this.multiplier    
-		});
-    
-}
+        this.setState({
+            nb: this.state.nb + (this.basePts * this.multiplier)
+        });
+        this.combo ++;
+        this.multiplier = Math.pow(2, Math.min(this.combo - 1, 3));
+        this.basePts ++;
+
+    }
 
     decrement() {
         this.combo = 0;
         this.multiplier = 1;
-		this.setState({
+        this.setState({
             nb: this.state.nb
         });
     }
@@ -39,7 +41,7 @@ class Compteur extends React.Component {
         return (
             <div className="score_compteur">
                 <p>
-                Score(x{this.multiplier}) : {this.state.nb}
+                    Score(x{this.multiplier}) : {this.state.nb}
                 </p>
             </div>
         )

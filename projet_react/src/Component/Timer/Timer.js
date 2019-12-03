@@ -58,6 +58,7 @@ class Timer extends React.Component {
 				Compteur.INSTANCE.decrement();
 				Choix.INSTANCE.launch();
 				let answer = document.querySelector("#answer");
+				answer.classList.remove("invisible");
 				answer.classList.remove("answerGood");
 				answer.classList.add("answerWrong");
 				answer.textContent = "Temps écoulé !";

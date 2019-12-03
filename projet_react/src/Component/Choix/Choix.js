@@ -35,7 +35,7 @@ export class Choix extends React.Component {
         super(props);
         this.emotions = [dummyEmotion, dummyEmotion];
         this.soundFragment = null;
-		
+		this.enPAuse = false;
 		Choix.INSTANCE = this;
     }
 
@@ -115,11 +115,39 @@ export class Choix extends React.Component {
             document.getElementById("emotionPlayer").play();
         }
     }
+    definition(){
+        let help  = document.querySelector("#help");
+        help.classList.remove("hide");
+        help.classList.add("divdef");
+        Choix.INSTANCE.enPAuse = Timer.INSTANCE.isPaused();
+        Timer.INSTANCE.stop();
+        Timer.INSTANCE.freeze();
+    }
+    exitDefinition(){
+        let exit = document.querySelector("#help");
+        exit.classList.add("hide");
+        Timer.INSTANCE.unfreeze();
+        if(!Choix.INSTANCE.enPAuse){
+            Timer.INSTANCE.start();
+        }
+    }
+
 
     render() {
         return (
             <div>
                 <div className="mt-5">
+                    <div id="help" className="hide">
+                        <button onClick={()=>this.exitDefinition()} className="btn exit m-2">x</button>
+                        <div className="text-warning p-2">
+                            <legend>{this.emotions[0][0]} :</legend>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque culpa cum deleniti doloribus enim, hic itaque iusto laboriosam mollitia natus neque porro praesentium soluta tempore velit voluptatem voluptates. Voluptatum?</p>
+                        </div>
+                        <div className="text-warning p-2">
+                            <legend>{this.emotions[1][0]} :</legend>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque culpa cum deleniti doloribus enim, hic itaque iusto laboriosam mollitia natus neque porro praesentium soluta tempore velit voluptatem voluptates. Voluptatum?</p>
+                        </div>
+                    </div>
                     <legend id="mid" className="mx-auto">Le test démarre directement à l'appui du bouton "Commencez".</legend>
                     <div id="functions" className="row col-12">
                         <button id="arrowPlay" className="btn btn-warning col-md-4 mx-auto" onClick={() => this.start()}><span className="glyphicon glyphicon-play"></span>Commencez</button>
@@ -130,6 +158,9 @@ export class Choix extends React.Component {
                     <div id="choix_gen_js" className="hide">
                         <h2 className="text-center mt-5">Sélectionnez une réponse (une seule est correcte).</h2>
                         <p id="answer" className="invisible">Aucune réponse</p>
+                        <div className="firstdivdef my-2">
+                            <button className="btn text-center def" onClick={(this.definition)}>Définitions</button>
+                        </div>
                         <div className="d-flex justify-content-center">
                             <button type="button" className="btn bouton mx-3" style={{backgroundColor: this.emotions[0][2]}} onClick={() => this.validate(0)}>
                                 <p className="emo">{this.emotions[0][0]}</p>

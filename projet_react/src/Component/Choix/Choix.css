@@ -64,3 +64,20 @@
     background-color: transparent;
     color: transparent;
 }
+.firstdivdef{
+    display: flex;
+    justify-content: center;
+}
+.def{
+    background-color: black;
+    color: #ffd119;
+}
+.divdef{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: black;
+}
