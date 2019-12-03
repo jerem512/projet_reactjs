@@ -116,13 +116,16 @@ export class Choix extends React.Component {
     start() {
         this.launch();
         let thisdom = ReactDOM.findDOMNode(this);
+        let thisbody = document.body;
         thisdom.querySelector("#arrowPlay").classList.add("hide");
         thisdom.querySelector("#play").classList.remove("hide");
         thisdom.querySelector("#choix_gen_js").classList.remove("hide");
         thisdom.querySelector("#mid").classList.add("hide");
-        document.body.querySelector("#rules").classList.add("hide");
-        document.body.querySelector("#txtrgl").classList.add("hide");
-        document.body.querySelector("#controls").classList.remove("hide");
+        thisbody.querySelector("#rules").classList.add("hide");
+        thisbody.querySelector("#txtrgl").classList.add("hide");
+        thisbody.querySelector("#controls").classList.remove("hide");
+        thisbody.querySelector(".score_compteur").classList.remove("hide");
+
         Timer.INSTANCE.init();
 
     }
