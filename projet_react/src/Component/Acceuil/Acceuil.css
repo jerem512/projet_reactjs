@@ -15,13 +15,6 @@
     color:#ffd119;
     font-size: 100px ;
 }
-a{
-    text-decoration: none;
-    color: #ffd119;
-}
-.firstdiv:hover{
-    cursor: pointer;
-}
 .hide{
     display: none;
 }
@@ -64,4 +57,7 @@ a{
 
 #pauseText:not(.hide) {
 	display: flex;
+}
+.box:hover{
+    cursor: pointer;
 }

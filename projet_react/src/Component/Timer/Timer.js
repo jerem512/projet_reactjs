@@ -216,8 +216,8 @@ class Timer extends React.Component {
 						</div>
 					</div>
 				</div>
-				<div id="controls">
-					<svg id="playpause" onClick={() => this.pauseClick()}>
+				<div id="controls" className="hide">
+					<svg id="playpause"  onClick={() => this.pauseClick()}>
 						<path id="pause1" d={this.getPlayPausePath(0)}></path>
 						<path id="pause2" d={this.getPlayPausePath(1)}></path>
 					</svg>
