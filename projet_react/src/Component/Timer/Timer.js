@@ -203,6 +203,16 @@ class Timer extends React.Component {
 								<li>Savoir reconnaître le besoin lié à une émotion</li>
 								<li>Savoir réagir à un besoin exprimé par une émotion</li>
 							</ul>
+							<ul>
+								<legend><u>Règles :</u></legend>
+								<li>Choisir une réponse parmis les deux, <br/>une seule correspond à l'émotion dans l'audio. </li>
+								<li>L'audio peut être réécouté une nouvelle fois <br/> en cliquant sur l'image d'ondes.</li>
+								<li>Le multiplicateur s'incrémente en fonctions <br/>de vos réponses :</li>
+								<ul>
+									<li>Plus vous donnez de bonnes réponses <br/> plus vous gagnez de points.</li>
+									<li>Le temps diminue à chaque réponses. <br/> Plus le temps diminue, plus le gain de points <br/> est important.</li>
+								</ul>
+							</ul>
 						</div>
 					</div>
 				</div>
