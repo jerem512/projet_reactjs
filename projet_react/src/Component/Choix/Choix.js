@@ -75,6 +75,7 @@ export class Choix extends React.Component {
         thisdom.querySelector("#choix_gen_js").classList.remove("hide");
         thisdom.querySelector("#mid").classList.add("hide");
         document.body.querySelector("#rules").classList.add("hide");
+        document.body.querySelector("#txtrgl").classList.add("hide");
 		Timer.INSTANCE.init();
 		
     }
@@ -148,6 +149,7 @@ export class Choix extends React.Component {
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque culpa cum deleniti doloribus enim, hic itaque iusto laboriosam mollitia natus neque porro praesentium soluta tempore velit voluptatem voluptates. Voluptatum?</p>
                         </div>
                     </div>
+                    <legend id="txtrgl" className="mx-auto text-danger txtrgl">! Veuillez lire les règles du jeu avant de commencer !</legend>
                     <legend id="mid" className="mx-auto">Le test démarre directement à l'appui du bouton "Commencez".</legend>
                     <div id="functions" className="row col-12">
                         <button id="arrowPlay" className="btn btn-warning col-md-4 mx-auto" onClick={() => this.start()}><span className="glyphicon glyphicon-play"></span>Commencez</button>
