@@ -1,0 +1,56 @@
+.jouer{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:#ffd119;
+    font-size: 100px ;
+}
+.backdiv{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
+    z-index: 1;
+}
+.box {
+    display: block;
+    background-color: black;
+    color: #ffd119;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    height: 300px;
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ffd119;
+}
+.box:hover{
+    cursor: pointer;
+}
+.hide {
+    display: none;
+}
+#pauseText {
+	position: absolute;
+	font-size: 7em;
+	font-weight: bold;
+	color: white;
+	text-shadow: -2px -2px 2px black, 2px -2px 2px black, -2px 2px 2px black, 2px 2px 2px black;
+	width: 100vw;
+	height: 100vh;
+	backdrop-filter: blur(5px);
+	background: rgba(255, 255, 255, 0.25);
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+}
+
+#pauseText:not(.hide) {
+	display: flex;
+}
