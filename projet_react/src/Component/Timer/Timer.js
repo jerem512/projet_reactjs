@@ -4,6 +4,7 @@ import './Timer.css';
 import Choix from "../Choix/Choix";
 import Compteur from "../Score/Score";
 
+// Permet de calculer la valeur linéaire entre `from` et `to`
 function interpolate(from, to, progress) {
 	if(progress <= 0) {
 		return from;
@@ -26,8 +27,8 @@ class Timer extends React.Component {
 		this.paused = true;
 		this.pauseAnimTimer = 15;
 		
-		this.radius = 45;
-		this.border = 3;
+		this.radius = 70;
+		this.border = 5;
 		
 		this.state = {};
 		
@@ -55,14 +56,17 @@ class Timer extends React.Component {
 		if(!this.paused) {
 			this.ticks ++;
 			if(this.ticks == this.time*60) {
-				Compteur.INSTANCE.decrement();
-				Choix.INSTANCE.launch();
-				let answer = document.querySelector("#answer");
-				answer.classList.remove("invisible");
-				answer.classList.remove("answerGood");
-				answer.classList.add("answerWrong");
-				answer.textContent = "Temps écoulé !";
-				this.reset();
+				let result = document.querySelector("#result");
+				result.textContent = "Temps écoulé";
+				result.classList.remove("hide");
+				this.paused = true;
+				this.freeze();
+				setTimeout(function() {
+					Timer.INSTANCE.reset();
+					Choix.INSTANCE.launch();
+					Compteur.INSTANCE.decrement();
+					result.classList.add("hide");
+				}, 5000);
 			} else if(this.ticks == (2*this.time/3)*60) {
 				this.className = "d-flex lowTime";
 			} else if(this.ticks == (this.time/3)*60) {
@@ -111,6 +115,7 @@ class Timer extends React.Component {
 	}
 	
 	setPaused(paused = !this.paused) {
+		console.log(this.frozen + " : " + paused);
 		if(this.ticks < this.time*60 && this.paused != paused) {
 			this.paused = paused;
 			this.updateState();
@@ -184,39 +189,42 @@ class Timer extends React.Component {
 		let thisdom = ReactDOM.findDOMNode(this);
 		thisdom.querySelector("#regles").classList.add("hide");
 	}
-	
+
+/*
+<div className="parentregles">
+	<div className="mx-auto rglmid my-2">
+		<button id="rules" className="btn btn-warning rgl" onClick={()=> this.enterRules()}>Règles</button>
+	</div>
+	<div id="regles" className="regles hide">
+		<div>
+			<div>
+				<button className="btn exit" onClick={()=> this.exitRules()}>x</button>
+			</div>
+			<ul className="mt-1">
+				<legend><u>Objectifs pédagogiques :</u></legend>
+				<li>Savoir identifier une émotion à la voix</li>
+				<li>Savoir reconnaître le besoin lié à une émotion</li>
+				<li>Savoir réagir à un besoin exprimé par une émotion</li>
+			</ul>
+			<ul>
+				<legend><u>Règles :</u></legend>
+				<li>Choisir une réponse parmis les deux, <br/>une seule correspond à l'émotion dans l'audio. </li>
+				<li>L'audio peut être réécouté une nouvelle fois <br/> en cliquant sur l'image d'ondes.</li>
+				<li>Le multiplicateur s'incrémente en fonctions <br/>de vos réponses :</li>
+				<ul>
+					<li>Plus vous donnez de bonnes réponses <br/> plus vous gagnez de points.</li>
+					<li>Le temps diminue à chaque réponses. <br/> Plus le temps diminue, plus le gain de points <br/> est important.</li>
+				</ul>
+			</ul>
+		</div>
+	</div>
+</div>
+*/
+
 	render() {
 		return (
 			<div>
-				<div className="parentregles">
-					<div className="mx-auto rglmid my-2">
-						<button id="rules" className="btn btn-warning rgl" onClick={()=> this.enterRules()}>Règles</button>
-					</div>
-					<div id="regles" className="regles hide">
-						<div>
-							<div>
-								<button className="btn exit" onClick={()=> this.exitRules()}>x</button>
-							</div>
-							<ul className="mt-1">
-								<legend><u>Objectifs pédagogiques :</u></legend>
-								<li>Savoir identifier une émotion à la voix</li>
-								<li>Savoir reconnaître le besoin lié à une émotion</li>
-								<li>Savoir réagir à un besoin exprimé par une émotion</li>
-							</ul>
-							<ul>
-								<legend><u>Règles :</u></legend>
-								<li>Choisir une réponse parmis les deux, <br/>une seule correspond à l'émotion dans l'audio. </li>
-								<li>L'audio peut être réécouté une nouvelle fois <br/> en cliquant sur l'image d'ondes.</li>
-								<li>Le multiplicateur s'incrémente en fonctions <br/>de vos réponses :</li>
-								<ul>
-									<li>Plus vous donnez de bonnes réponses <br/> plus vous gagnez de points.</li>
-									<li>Le temps diminue à chaque réponses. <br/> Plus le temps diminue, plus le gain de points <br/> est important.</li>
-								</ul>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div id="controls">
+				<div id="controls" className="hide">
 					<svg id="playpause" onClick={() => this.pauseClick()}>
 						<path id="pause1" d={this.getPlayPausePath(0)}></path>
 						<path id="pause2" d={this.getPlayPausePath(1)}></path>
@@ -239,7 +247,5 @@ class Timer extends React.Component {
 	}
 	
 }
-
-ReactDOM.render(<Timer />, document.getElementById('time'));
 
 export default Timer;

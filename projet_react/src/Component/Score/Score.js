@@ -39,7 +39,7 @@ class Compteur extends React.Component {
 
     render() {
         return (
-            <div className="score_compteur">
+            <div id="score_compteur" className="hide">
                 <p>
                     Score(x{this.multiplier}) : {this.state.nb}
                 </p>
@@ -47,8 +47,5 @@ class Compteur extends React.Component {
         )
     }
 }
-
-
-ReactDOM.render(<Compteur />, document.getElementById('score'));
 
 export default Compteur;

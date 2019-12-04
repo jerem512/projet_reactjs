@@ -1,7 +1,14 @@
-.score_compteur{
+#score_compteur {
     position: absolute;
-    top: 50px;
-    left: 10px;
+	top: 0;
+	left: 0;
+    width: 100%;
+	text-align: center;
     font-weight: bold;
     font-size: 2rem;
+	transition: top 0.4s;
+}
+
+#score_compteur p {
+	line-height: 1;
 }

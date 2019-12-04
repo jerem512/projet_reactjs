@@ -38,4 +38,5 @@ class Acceuil extends React.Component {
         );
     }
 }
-ReactDOM.render(<Acceuil />, document.getElementById('root'));
+
+export default Acceuil;
