@@ -171,47 +171,6 @@ export class Choix extends React.Component {
         }
     }
 
-/*
-<div className="mt-5">
-	<div id="help" className="hide">
-		<button onClick={()=>this.exitDefinition()} className="btn exit m-2">x</button>
-		<div className="text-warning p-2">
-			<legend>{this.emotions[0].getName()} :</legend>
-			<p>{this.emotions[0].getDesc()}</p>
-		</div>
-		<div className="text-warning p-2">
-			<legend>{this.emotions[1].getName()} :</legend>
-			<p>{this.emotions[1].getDesc()}</p>
-		</div>
-	</div>
-	<legend id="txtrgl" className="mx-auto text-danger txtrgl">! Veuillez lire les règles du jeu avant de commencer !</legend>
-	<legend id="mid" className="mx-auto">Le test démarre directement à l'appui du bouton "Commencez".</legend>
-	<div id="functions" className="row col-12">
-		<button id="arrowPlay" className="btn btn-warning col-md-4 mx-auto" onClick={() => this.start()}><span className="glyphicon glyphicon-play"></span>Commencez</button>
-		<div id="play" className="hide mx-auto">
-			<img src={icoAudio} alt="logo" onClick={this.audioRestart}/>
-		</div>
-	</div>
-	<div id="choix_gen_js" className="hide">
-		<h2 id="selectText" className="text-center mt-5">Sélectionnez une réponse (une seule est correcte).</h2>
-		<h2 id="endText" className="text-center mt-5 hide">Fin du jeu!</h2>
-		<p id="answer" className="invisible">Aucune réponse</p>
-		<div className="firstdivdef my-2">
-			<button className="btn text-center def" onClick={(this.definition)}>Définitions</button>
-		</div>
-		<div className="d-flex justify-content-center">
-			<button type="button" className="btn bouton mx-3" style={{backgroundColor: this.emotions[0].getColor()}} onClick={() => this.validate(0)}>
-				<p className="emo">{this.emotions[0].getName()}</p>
-			</button>
-			<button type="button" className="btn bouton mx-3" style={{backgroundColor: this.emotions[1].getColor()}} onClick={() => this.validate(1)}>
-				<p className="emo">{this.emotions[1].getName()}</p>
-			</button>
-		</div>
-	</div>
-</div>
-*/
-
-
     render() {
         return (
 			<div>
