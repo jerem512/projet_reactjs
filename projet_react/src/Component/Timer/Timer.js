@@ -17,6 +17,7 @@ function interpolate(from, to, progress) {
 
 class Timer extends React.Component {
 	
+	// contient l'instance de cette classe
 	static INSTANCE;
 	
 	// Constructeur de la classe

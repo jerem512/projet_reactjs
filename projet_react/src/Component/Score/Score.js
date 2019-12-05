@@ -5,6 +5,7 @@ import './Score.css';
 
 class Compteur extends React.Component {
 
+	// contient l'instance de cette classe
     static INSTANCE;
 
 	// Constructeur de la classe

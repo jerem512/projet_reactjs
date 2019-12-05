@@ -6,13 +6,18 @@ import App from "../App/App";
 
 class Acceuil extends React.Component {
 	
+	// Constructeur de la classe
     constructor(props) {
         super(props);
         this.state = {addClass: false}
     }
+	
+	// activé lorsqu'on clique sur le "JOUER"
     toggle() {
         this.setState({addClass: !this.state.addClass});
     }
+	
+	// fait le rendu HTML de l'élément
     render() {
         let boxClass = ["box"];
         if(this.state.addClass) {

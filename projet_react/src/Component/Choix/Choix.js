@@ -10,6 +10,7 @@ import audioWave3 from "./media/audioWave3.svg";
 
 import './Choix.css';
 
+// classe définissant une émotion (sera créée via contenu dans la base de données)
 class Emotion {
 	
 	constructor(name, audios, color/*, desc*/) {
@@ -19,10 +20,12 @@ class Emotion {
 		this.desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt convallis magna at tempor. Praesent tempor leo in purus ultricies ullamcorper. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras rhoncus, nunc sit amet pharetra elementum, massa dolor iaculis dui, non commodo enim leo nec nunc. Aenean vestibulum quis leo quis rhoncus. Mauris diam nisi, sodales ultrices odio sit amet, tincidunt varius ex. Vivamus condimentum consectetur leo ut maximus. Quisque ultricies ligula felis, vitae feugiat urna elementum nec. Curabitur condimentum ac sem a commodo.";
 	}
 	
+	// renvoie le nom de l'émotion
 	getName() {
 		return this.name;
 	}
 	
+	// renvoie si il reste des sources audio à jouer
 	hasAudioSourcesLeft() {
 		for(let audio of this.audios) {
 			if(!audio.played) {
@@ -32,6 +35,7 @@ class Emotion {
 		return false;
 	}
 	
+	// renvoie une source audio aléatoire
 	getAudio() {
 		let i = Math.floor(Math.random()*this.audios.length);
 		while(this.audios[i].played) {
@@ -41,15 +45,18 @@ class Emotion {
 		return this.audios[i].source;
 	}
 	
+	// renvoie la couleur de l'émotion
 	getColor() {
 		return this.color;
 	}
 	
+	// renvoie la description de l'émotion
 	getDesc() {
 		return this.desc;
 	}
 }
 
+// charge les sources audios
 let sounds = {}
 for(let emoname of ["colere", "tristesse", "joie", "peur"]) {
 	sounds[emoname] = [];
@@ -58,23 +65,28 @@ for(let emoname of ["colere", "tristesse", "joie", "peur"]) {
 	}
 }
 
-let emotions = [
+// créé les émotions
+const emotions = [
     new Emotion("Colère", sounds["colere"], "red"),
     new Emotion("Tristesse", sounds["tristesse"], "lime"),
     new Emotion("Joie", sounds["joie"], "#3ba9cd"),
     new Emotion("Peur", sounds["peur"], "mediumpurple")
 ];
 
+// renvoie une émotion aléatore
 function randomEmotion() {
 	return emotions[Math.floor(Math.random()*emotions.length)];
 }
 
+// "fausse émotion" pour éviter que la page plante si il n'y a pas d'émotion
 let dummyEmotion = new Emotion("", null, "black");
 
 export class Choix extends React.Component {
     
+	// contient l'instance de cette classe
 	static INSTANCE;
 	
+	// Constructeur de la classe
     constructor(props) {
         super(props);
         this.emotions = [dummyEmotion, dummyEmotion];
@@ -84,31 +96,38 @@ export class Choix extends React.Component {
 		Choix.INSTANCE = this;
     }
 
-    generateEmo() {
-		this.answer = Math.floor(Math.random()*2);
-		let valid = false;
-		while(!valid) {
-			this.emotions = [randomEmotion(), randomEmotion()];
-			valid = this.emotions[0] != this.emotions[1] && this.emotions[this.answer].hasAudioSourcesLeft();
-		}
-		this.firstPlay = true;
-    }
-
-    generateSound() {
+	// selectionne deux émotions aléatoires si il reste des sources audios, puis la joue
+    loadEmotions() {
+		// reste-t-il des sources audios ?
 		let canContinue = false;
 		for(let emotion of emotions) {
 			if(emotion.hasAudioSourcesLeft()) {
+				// oui, il reste au moins une source audio
 				canContinue = true;
 			}
 		}
 		
 		if(canContinue) {
+			// choix de la bonne réponse
+			this.answer = Math.floor(Math.random()*2);
+			
+			let valid = false;
+			while(!valid) {
+				// selectionne les émotions
+				this.emotions = [randomEmotion(), randomEmotion()];
+				// le choix est valide si les deux émotions sont différentes et que la réponse a au moins une source audio restante
+				valid = this.emotions[0] != this.emotions[1] && this.emotions[this.answer].hasAudioSourcesLeft();
+			}
+			// sert à empécher le timer de se relancer si la source audio fini après que l'utilisateur a répondu
+			this.firstPlay = true;
+			// joue la source audio
 			let player = ReactDOM.findDOMNode(this).querySelector("#emotionPlayer");
 			player.setAttribute("src", this.emotions[this.answer].getAudio());
 			this.playAudio(true);
 		}
     }
 
+	// force un rendu de l'élément
     updateState() {
         this.setState({
             emotions: this.emotions,
@@ -116,23 +135,28 @@ export class Choix extends React.Component {
         });
     }
 
+	// lance une question
     launch() {
-        this.generateEmo();
-        this.generateSound();
+        this.loadEmotions();
         this.updateState();
     }
 
+	// affiche les éléments au début du jeu
     start() {
         this.launch();
+		// cache le bouton "PRESS START TO PLAY"
 		document.querySelector("#start").classList.add("hide");
+		// affiche le jeu
 		document.querySelector("#game").classList.remove("hide");
+		document.querySelector("#game").classList.add("d-flex");
 		document.querySelector("#controls").classList.remove("hide");
 		document.querySelector("#score_compteur").classList.remove("hide");
-		document.querySelector("#game").classList.add("d-flex");
+		// initialise le timer
 		Timer.INSTANCE.init();
 		
     }
 
+	// vérifie le choix de l'utilisateur
     validate(i) {
 		if(!Timer.INSTANCE.isPaused()) {
 			let result = document.querySelector("#result");
@@ -144,9 +168,11 @@ export class Choix extends React.Component {
 				Compteur.INSTANCE.decrement();
 				result.textContent = "Mauvaise réponse";
 			}
+			// affiche le texte de résultat
 			result.classList.remove("hide");
 			Timer.INSTANCE.stop();
 			Timer.INSTANCE.freeze();
+			// cache le texte de résultat au bout de 5 secondes 
 			setTimeout(function() {
 				Timer.INSTANCE.reset();
 				Choix.INSTANCE.launch();
@@ -155,6 +181,7 @@ export class Choix extends React.Component {
 		}
     }
 	
+	// désactive l'animation de lecture et relance le timer (la première fois)
 	audioEnd() {
 		if(Choix.INSTANCE.firstPlay) {
 			Timer.INSTANCE.unfreeze();
@@ -164,13 +191,16 @@ export class Choix extends React.Component {
 		document.getElementById("playAudio").classList.remove("playing");
 	}
 
-	playAudio(force = false) {
-        if(!Timer.INSTANCE.isPaused() || force) {
+	// joue l'audio (par défaut, ne pas forcer)
+	// si on force, ça peux passer outre la pause
+	playAudio(forced = false) {
+        if(!Timer.INSTANCE.isPaused() || forced == true) {
             document.getElementById("emotionPlayer").play();
 			document.getElementById("playAudio").classList.add("playing");
         }
     }
 
+	// fait le rendu HTML de l'élément
     render() {
         return (
 			<div>
