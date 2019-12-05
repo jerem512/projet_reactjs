@@ -77,6 +77,7 @@ export class Choix extends React.Component {
         this.emotions = [dummyEmotion, dummyEmotion];
         this.answer = null;
 		this.showDefs = false;
+		this.firstPlay = true;
 		Choix.INSTANCE = this;
     }
 
@@ -87,6 +88,7 @@ export class Choix extends React.Component {
 			this.emotions = [randomEmotion(), randomEmotion()];
 			valid = this.emotions[0] != this.emotions[1] && this.emotions[this.answer].hasAudioSourcesLeft();
 		}
+		this.firstPlay = true;
     }
 
     generateSound() {
@@ -151,8 +153,11 @@ export class Choix extends React.Component {
     }
 	
 	audioEnd() {
-		Timer.INSTANCE.unfreeze();
-		Timer.INSTANCE.start();
+		if(this.firstPlay) {
+			Timer.INSTANCE.unfreeze();
+			Timer.INSTANCE.start();
+			this.firstPlay = false;
+		}
 		document.getElementById("playAudio").classList.remove("playing");
 	}
 
