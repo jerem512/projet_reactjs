@@ -8,11 +8,6 @@ import audioWave1 from "./media/audioWave1.svg";
 import audioWave2 from "./media/audioWave2.svg";
 import audioWave3 from "./media/audioWave3.svg";
 
-import colere from "../../audio/colere.ogg";
-import joie from "../../audio/joie.ogg";
-import peur from "../../audio/peur.ogg";
-import tristesse from "../../audio/tristesse.ogg";
-
 import './Choix.css';
 
 class Emotion {
@@ -55,11 +50,19 @@ class Emotion {
 	}
 }
 
+let sounds = {}
+for(let emoname of ["colere", "tristesse", "joie", "peur"]) {
+	sounds[emoname] = [];
+	for(let i = 1; i <= 3; i++) {
+		sounds[emoname].push(require("../../audio/" + emoname + "_" + i + ".ogg"));
+	}
+}
+
 let emotions = [
-    new Emotion("Colère", [colere], "red"),
-    new Emotion("Tristesse", [tristesse], "lime"),
-    new Emotion("Joie", [joie], "#3ba9cd"),
-    new Emotion("Peur", [peur], "mediumpurple")
+    new Emotion("Colère", sounds["colere"], "red"),
+    new Emotion("Tristesse", sounds["tristesse"], "lime"),
+    new Emotion("Joie", sounds["joie"], "#3ba9cd"),
+    new Emotion("Peur", sounds["peur"], "mediumpurple")
 ];
 
 function randomEmotion() {
@@ -153,10 +156,10 @@ export class Choix extends React.Component {
     }
 	
 	audioEnd() {
-		if(this.firstPlay) {
+		if(Choix.INSTANCE.firstPlay) {
 			Timer.INSTANCE.unfreeze();
 			Timer.INSTANCE.start();
-			this.firstPlay = false;
+			Choix.INSTANCE.firstPlay = false;
 		}
 		document.getElementById("playAudio").classList.remove("playing");
 	}
