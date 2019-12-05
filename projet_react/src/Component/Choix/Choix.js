@@ -181,7 +181,7 @@ export class Choix extends React.Component {
 						for(let i = 0; i <= 1; i++) {
 							if(this.emotions[i] != dummyEmotion) {
 								items.push(
-									<div key={"choix"+i} id={"choix"+i} className="bouton" onClick={() => {this.validate(i)}} style={{backgroundColor: this.emotions[i].getColor()}}>
+									<div key={"choix"+i} id={"choix"+i} className="bouton m-2" onClick={() => {this.validate(i)}} style={{backgroundColor: this.emotions[i].getColor()}}>
 										<p className="emoName">{this.emotions[i].getName()}</p>
 										<p className={"emoDef " + (this.showDefs ? "" : "hide")}>{this.emotions[i].getDesc()}</p>
 									</div>
