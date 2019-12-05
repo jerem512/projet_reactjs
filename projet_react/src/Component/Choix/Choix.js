@@ -17,21 +17,33 @@ import './Choix.css';
 
 class Emotion {
 	
-	constructor(name, audio, color/*, desc*/) {
+	constructor(name, audios, color/*, desc*/) {
 		this.name = name;
-		this.audio = audio;
+		this.audios = audios == null ? [] : audios.map(function(audio) { return {source: audio, played: false} });
 		this.color = color;
 		this.desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt convallis magna at tempor. Praesent tempor leo in purus ultricies ullamcorper. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras rhoncus, nunc sit amet pharetra elementum, massa dolor iaculis dui, non commodo enim leo nec nunc. Aenean vestibulum quis leo quis rhoncus. Mauris diam nisi, sodales ultrices odio sit amet, tincidunt varius ex. Vivamus condimentum consectetur leo ut maximus. Quisque ultricies ligula felis, vitae feugiat urna elementum nec. Curabitur condimentum ac sem a commodo.";
-		this.played = false;
 	}
 	
 	getName() {
 		return this.name;
 	}
 	
+	hasAudioSourcesLeft() {
+		for(let audio of this.audios) {
+			if(!audio.played) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	getAudio() {
-		this.played = true;
-		return this.audio;
+		let i = Math.floor(Math.random()*this.audios.length);
+		while(this.audios[i].played) {
+			i = Math.floor(Math.random()*this.audios.length);
+		}
+		this.audios[i].played = true;
+		return this.audios[i].source;
 	}
 	
 	getColor() {
@@ -41,29 +53,20 @@ class Emotion {
 	getDesc() {
 		return this.desc;
 	}
-	
-	hasPlayed() {
-		return this.played;
-	}
-	
 }
 
 let emotions = [
-    new Emotion("Colère", colere, "red"),
-    new Emotion("Tristesse", tristesse, "lime"),
-    new Emotion("Joie", joie, "#3ba9cd"),
-    new Emotion("Peur", peur, "mediumpurple")
+    new Emotion("Colère", [colere], "red"),
+    new Emotion("Tristesse", [tristesse], "lime"),
+    new Emotion("Joie", [joie], "#3ba9cd"),
+    new Emotion("Peur", [peur], "mediumpurple")
 ];
 
+function randomEmotion() {
+	return emotions[Math.floor(Math.random()*emotions.length)];
+}
+
 let dummyEmotion = new Emotion("", null, "black");
-
-function randArr(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function randomEmotions() {
-    return randArr(emotions);
-}
 
 export class Choix extends React.Component {
     
@@ -78,22 +81,23 @@ export class Choix extends React.Component {
     }
 
     generateEmo() {
-        this.emotions = [randomEmotions(), randomEmotions()];
-        while(this.emotions[0] == this.emotions[1]) {
-            this.emotions[1] = randomEmotions();
-        }
+		this.answer = Math.floor(Math.random()*2);
+		let valid = false;
+		while(!valid) {
+			this.emotions = [randomEmotion(), randomEmotion()];
+			valid = this.emotions[0] != this.emotions[1] && this.emotions[this.answer].hasAudioSourcesLeft();
+		}
     }
 
     generateSound() {
 		let canContinue = false;
 		for(let emotion of emotions) {
-			if(!emotion.hasPlayed()) {
+			if(emotion.hasAudioSourcesLeft()) {
 				canContinue = true;
 			}
 		}
 		
 		if(canContinue) {
-			this.answer = Math.floor(Math.random()*2);
 			let player = ReactDOM.findDOMNode(this).querySelector("#emotionPlayer");
 			player.setAttribute("src", this.emotions[this.answer].getAudio());
 			this.playAudio(true);
