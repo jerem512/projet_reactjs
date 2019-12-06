@@ -1,86 +1,142 @@
+#game {
+	--score-height: 40px;
+    height: calc(100vh - var(--score-height));
+	margin-top: var(--score-height);
+	position: relative;
+}
+
 .bouton {
-    width: 500px;
-    height: 200px;
-    border: 1px solid black;
-	color: whitesmoke;
-}
-.bouton:hover{
-    color: black;
-    border: 3px solid black;
-}
-#arrowPlay {
-    background-color: black;
-    color: #ffd119;
-    border: none;
-}
-#arrowPlay:hover {
-    background-color: #ffd119;
-    color: black;
+    width: 50%;
+	height: 100%;
+	color: white;
+	text-align: center;
 }
 
-#play * {
-    width: 400px;
-    color: whitesmoke;
-    display: block;
-    margin: auto;
-    text-align: center;
-    position: relative;
+.bouton .emoName {
+	font-size: 5em;
+	padding-top: 1em;
+	text-shadow: 0px 0px 0px black;
+	transition: text-shadow 0.4s;
 }
-#play{
-    position: relative;
-    top: -90px;
-    cursor: pointer;
+
+.bouton .emoDef {
+	font-size: 1.5em;
+	max-width: 80%;
+	margin: auto;
+}
+
+.bouton:hover .emoName {
+	text-shadow: 0px 0px 10px black;
+}
+
+#start {
+	font-size: 1.5em;
+	background-color: black;
+	border-radius: 5px;
+	color: #ffd119;
+	border: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: background-color 0.4s, color 0.41s;
+}
+
+#start:hover {
+	background-color: #ffd119;
+	color: black;
+}
+
+.control {
+	z-index: 1;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	background: white;
+	border-radius: 50%;
+	border: 4px solid black;
+	bottom: 100px;
+	width: 6em;
+	height: 6em;
+	text-align: center;
+	cursor: pointer;
 }
 
 
-#functions{
-    margin-left: 0 !important; 
-}
-#mid{
-    width: fit-content;
-}
-.txtrgl{
-    width: fit-content;
-}
-.emo{
-    font-weight: bold;
-    font-size: 2em;
+#defsToggle {
+	bottom: 100px;
 }
 
-#answer{
-    text-align: center;
-    margin-right: 25%;
-    margin-left: 25% ;
-    border-radius: 5px;
-    font-size: larger;
-    font-weight: bold;
+#defsToggle .material-icons {
+	font-size: 3em;
+	line-height: 1.75;
 }
-.answerGood{
-    color: #00B300;
-    background-color: darkgreen;
+
+#playAudio {
+	top: 100px;
 }
-.answerWrong{
-    color: red;
-    background-color: darkred;
+
+@keyframes blip1 {
+	0% {opacity: 0;}
+	33% {opacity: 1;}
+	66% {opacity: 0;}
+	100% {opacity: 0;}
 }
-.invisible{
-    background-color: transparent;
-    color: transparent;
+
+@keyframes blip2 {
+	0% {opacity: 0;}
+	33% {opacity: 0;}
+	66% {opacity: 1;}
+	100% {opacity: 0;}
 }
-.firstdivdef{
-    display: flex;
-    justify-content: center;
+
+@keyframes blip3 {
+	0% {opacity: 0;}
+	33% {opacity: 0;}
+	66% {opacity: 0;}
+	100% {opacity: 1;}
 }
-.def{
-    background-color: black;
-    color: #ffd119;
+
+#playAudio img {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transition: opacity 0.25s;
 }
-.divdef{
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    background-color: black;
+
+#playAudio img:not(#audioBase) {
+	opacity: 0;
+}
+
+#playAudio.playing img:nth-of-type(2) {
+	animation: blip1 0.75s infinite;
+}
+
+#playAudio.playing img:nth-of-type(3) {
+	animation: blip2 0.75s infinite;
+}
+
+#playAudio.playing img:nth-of-type(4) {
+	animation: blip3 0.75s infinite;
+}
+
+#result {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	font-size: 5em;
+	color: white;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+	backdrop-filter: blur(5px);
+	text-shadow: -2px -2px 2px black, 2px -2px 2px black, -2px 2px 2px black, 2px 2px 2px black;
+}
+
+#result:not(.hide) {
+	display: flex;
 }
